@@ -1,5 +1,9 @@
 package Automate;
 
-public class Etat {
+
+
+public class Etat{
+	
+	int State;
 
 }
