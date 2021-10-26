@@ -11,7 +11,7 @@ public class Automate {
 	    private ArrayList<Etat> finalStates;
 	    private ArrayList<String> alphabet;
 	    
-	    private TransitionTable<Q, S> transitionTable;
+	    private String[][] transitionTable;
 	
 }
 	
