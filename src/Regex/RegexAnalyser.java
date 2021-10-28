@@ -16,7 +16,7 @@ public class RegexAnalyser {
 
 
 	RegexAnalyser(String regex, char[] alphabet) throws ValidationException {
-		this.regex = regex;
+		this.setRegex(regex);
 
 		if (alphabet.length == 0) {
 			throw new ValidationException("l'alphabet est vide");
@@ -61,8 +61,16 @@ public class RegexAnalyser {
 	}
 
 	RegexAnalyser(String regex) {
-		this.regex = regex;
+		this.setRegex(regex);
 
+	}
+
+	public String getRegex() {
+		return regex;
+	}
+
+	public void setRegex(String regex) {
+		this.regex = regex;
 	}
 	
 	
