@@ -14,10 +14,6 @@ public class RegexAnalyser {
 	private String regex;
 	private char[] alphabet;
 
-	RegexAnalyser(String regex) {
-		this.regex = regex;
-
-	}
 
 	RegexAnalyser(String regex, char[] alphabet) throws ValidationException {
 		this.regex = regex;
@@ -52,6 +48,21 @@ public class RegexAnalyser {
 	 */
 	public static Boolean verifySiRegexApartientALaphabet() {
 		return true;
+	}
+	
+	
+
+	public char[] getAlphabet() {
+		return alphabet;
+	}
+
+	public void setAlphabet(char[] alphabet) {
+		this.alphabet = alphabet;
+	}
+
+	RegexAnalyser(String regex) {
+		this.regex = regex;
+
 	}
 	
 	
