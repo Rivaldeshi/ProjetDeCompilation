@@ -45,6 +45,11 @@ public class Automate {
 		this.states.add(state);
 		transitionTable.AjouterEtat(state);
 	}
+	
+	public void ajouterUnEtatFinal(Etat state) {
+		state.setIsFinal();
+		this.finalStates.add(state);
+	}
 
 	public void ajouterUneTransition(Etat state, String Etiquet, Etat suivant) throws ValidationException {
 		transitionTable.AjouterTransition(state, Etiquet, suivant);
@@ -63,6 +68,7 @@ public class Automate {
 	}
 
 	public void setInitialState(Etat initialState) {
+		initialState.setIsIntials();
 		this.initialState = initialState;
 	}
 
