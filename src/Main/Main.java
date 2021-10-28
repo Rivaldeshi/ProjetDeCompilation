@@ -21,7 +21,7 @@ public class Main {
 	
 	public static void testTransistion(){
 		
-		Etat etat1= new Etat(1) , etat2= new Etat(2), etat3= new Etat(3);
+		Etat etat1= new Etat(1) , etat2= new Etat(2), etat3= new Etat(4);
 		
 		Automate aut = new Automate(Constans.APHABET_PAR_DEFAUT);
 		
