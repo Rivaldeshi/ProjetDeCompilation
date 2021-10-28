@@ -11,8 +11,8 @@ import Utils.ValidationException;
  */
 public class RegexAnalyser {
 
-	public String regex;
-	public char[] alphabet;
+	private String regex;
+	private char[] alphabet;
 
 	RegexAnalyser(String regex) {
 		this.regex = regex;
