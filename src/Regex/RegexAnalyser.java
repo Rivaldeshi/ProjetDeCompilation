@@ -1,12 +1,13 @@
 package Regex;
 
-import javax.xml.bind.ValidationException;
+import Utils.ValidationException;
+
 
 /**
  * Cette classe nous permet d'effectuer les verification possible sur le regex
  * si elle est bien former ou elle appartient mm a l'alphabet
  * 
- * @author
+ * @author Rivaldes Hi
  */
 public class RegexAnalyser {
 
@@ -49,7 +50,7 @@ public class RegexAnalyser {
 	 * cette fonction verifier si l'expression reguliere est bien aparteient au Langage
 	 * @return
 	 */
-	public static Boolean verifySiRegexApartientauLanguage() {
+	public static Boolean verifySiRegexApartientALaphabet() {
 		return true;
 	}
 	
