@@ -1,11 +1,8 @@
 package Main;
 
-
+import Automate.*;
 import Utils.Constans;
 import Utils.ValidationException;
-import Automate.Automate;
-import Automate.AutomateBase;
-import Automate.Etat;
 
 public class Main {
 
