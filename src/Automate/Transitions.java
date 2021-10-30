@@ -10,7 +10,7 @@ import Utils.ValidationException;
 
 @SuppressWarnings("serial")
 public class Transitions extends
-		HashMap<Etat, HashMap<String, ArrayList<Etat>>> {
+		HashMap<Etat, HashMap<String, List<Etat>>> {
 
 	String[] Alphabet;
 
@@ -32,7 +32,7 @@ public class Transitions extends
 	}
 
 	public void AjouterEtat(Etat etat) {
-		HashMap<String, ArrayList<Etat>> entrer = new HashMap<String, ArrayList<Etat>>();
+		HashMap<String, List<Etat>> entrer = new HashMap<String, List<Etat>>();
 		for (String sysmbol : Alphabet) {
 			entrer.put(sysmbol, new ArrayList<Etat>());
 		}
@@ -48,8 +48,11 @@ public class Transitions extends
 		} else {
 		   throw new ValidationException("L'etiquet \""+Etiquet+"\" de la transition n'apartient pas a l'alphabet");
 		}
-	  
+	}
 	
+	public List<Etat> getTransition(Etat et, String etiquet){
+		
+		return this.get(et).get(etiquet);
 	}
 
 }

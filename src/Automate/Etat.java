@@ -3,13 +3,25 @@ package Automate;
 public class Etat {
 
 	private int State;
+	public int getState() {
+		return State;
+	}
+
+	public void setState(int state) {
+		State = state;
+	}
+
 	private boolean isFinal = false;
 	private boolean isInitial = false;
 
 	public Etat(int state) {
 		this.State = state;
 	}
-
+    
+	public Etat SetState(int state){
+		this.State= state;
+		return this;
+	}
 	public String toString() {
 		if (isFinal && isInitial) {
 			return "q"+ this.State+"(I,F)" ;

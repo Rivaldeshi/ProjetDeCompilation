@@ -42,11 +42,15 @@ public class Automate {
 	}
 
 	public void ajouterUnEtat(Etat state) {
+		if(state.isFinal()){
+			this.finalStates.add(state);
+		}
 		this.states.add(state);
 		transitionTable.AjouterEtat(state);
 	}
 	
 	public void ajouterUnEtatFinal(Etat state) {
+		ajouterUnEtat(state);
 		state.setIsFinal();
 		this.finalStates.add(state);
 	}
