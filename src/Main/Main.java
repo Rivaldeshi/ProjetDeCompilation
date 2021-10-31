@@ -24,10 +24,6 @@ System.out.println("sa va coder tres fort");
 
 		// Brouillon.testPostfix();
 	
-		
-		
-		testTransistion();
-		testAutomateSimple();
 	 
 		//testAutomate();
 		Brouillon.testVerif();
