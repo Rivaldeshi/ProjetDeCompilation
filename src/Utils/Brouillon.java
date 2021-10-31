@@ -145,4 +145,20 @@ public class Brouillon {
 		return AutomateOperation.AutomateEtoil(a1);
 	}
 
+
+	public static void testAutomateCompilquer() {
+
+		try {
+			Automate automat1 = AutomateOperation.AutomateSimple("a");
+			Automate automat2 = AutomateOperation.AutomateSimple("b");
+			Automate aut = AutomateOperation.AutomatePlus(automat1, automat2);
+
+			System.out.println(aut.getTransitionTable());
+			System.out.println(aut.getStates().size());
+		} catch (ValidationException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }
