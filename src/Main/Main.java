@@ -17,12 +17,22 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		System.out.println("sa va coder fort");
 
+System.out.println("sa va coder tres fort");
 		// testAutomate();
 		// Brouillon.testVerif();
 
 		// Brouillon.testPostfix();
+	
+		
+		
+		testTransistion();
+		testAutomateSimple();
+	 
+		//testAutomate();
+		Brouillon.testVerif();
+
+
 		// testTransistion();
 		// testAutomateSimple();
 		// textRegex();
