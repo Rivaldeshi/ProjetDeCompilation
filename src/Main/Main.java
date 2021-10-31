@@ -18,13 +18,17 @@ public class Main {
 	public static void main(String[] args) {
 
 		System.out.println("sa va coder fort");
-	 
-		//testAutomate();
-		Brouillon.testVerif();
 
+		// testAutomate();
+		// Brouillon.testVerif();
+
+		// Brouillon.testPostfix();
 		// testTransistion();
 		// testAutomateSimple();
-		textRegex();
+		// textRegex();
+
+		Brouillon.test();
+
 	}
 
 	public static void textRegex() {
@@ -33,7 +37,8 @@ public class Main {
 		RegexAnalyser reg = null;
 		try {
 			reg = new RegexAnalyser(expressionReguliere, alphabet);
-			// RegexAnalyser.verifySiRegexApartientALaphabet(reg); (ne fonctione pas encor)
+			// RegexAnalyser.verifySiRegexApartientALaphabet(reg); (ne fonctione
+			// pas encor)
 			RegexAnalyser.verifySiRegexEstBienFormer(reg);
 			RegexAnalyser.verifySiRegexEstBienParentheser(reg);
 
@@ -42,7 +47,5 @@ public class Main {
 		}
 
 	}
-
-	
 
 }

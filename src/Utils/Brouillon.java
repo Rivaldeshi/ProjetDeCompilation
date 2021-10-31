@@ -2,7 +2,9 @@ package Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
+import Regex.TransformRegex;
 import Automate.Automate;
 import Automate.AutomateOperation;
 import Automate.Determinisation;
@@ -10,8 +12,6 @@ import Automate.Etat;
 import AutomateRegex.Verifications;
 
 public class Brouillon {
-	
-	
 
 	public static void testTransistion() {
 
@@ -70,10 +70,56 @@ public class Brouillon {
 
 	public static void testVerif() {
 		try {
-		    Automate aut = conca(conca(conca(etoil(ou( sim("a"),sim("b"))),sim("a")),sim("b")),sim("b"));
-		//	Automate aut = etoil(sim(""));
+			Automate aut = conca(
+					conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")),
+							sim("b")), sim("b"));
+			// Automate aut = etoil(sim(""));
 
-			Verifications.ApartientAutomate("aaaaabbbaabb", aut);
+			System.out.println(aut.getTransitionTable());
+
+		} catch (ValidationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void test() {
+
+		Scanner sc = new Scanner(System.in);
+		try {
+
+			System.out
+					.print("Entrer un expression reguliere Bien former  :   ");
+			String regex = sc.nextLine();
+           
+			
+			Automate aut = TransformRegex.evaluateRegex(regex);
+			System.out.println(aut.getTransitionTable());
+			
+			System.out.println();
+
+			System.out.print("Entrer un mot :   ");
+
+			String mot = sc.nextLine();
+			
+			System.out.println();
+			
+			
+
+			Verifications.ApartientAutomate(mot, aut);
+
+		} catch (ValidationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void testPostfix() {
+
+		try {
+			String postFix = TransformRegex.infixToPostfix("(a+b)*.a.b.b");
+
+			System.out.println(postFix);
 
 		} catch (ValidationException e) {
 			// TODO Auto-generated catch block

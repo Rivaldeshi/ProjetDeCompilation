@@ -49,7 +49,7 @@ public class Verifications {
 			q = autdeter.getTransitionTable().getTransition(q,mot.charAt(i)+"").get(0);
 			
 		}
-		System.out.println(q);
+		System.out.println(q.isFinal());
 		return q.isFinal();
 	}
 	
