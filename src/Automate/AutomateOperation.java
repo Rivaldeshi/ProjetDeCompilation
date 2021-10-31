@@ -8,37 +8,47 @@ import Utils.ValidationException;
 
 /**
  * Cette classe nous permet de construire les automate avec les oparation de
- * base
+ * base tout ses fontion sont static
  * 
  * @author Rivaldes Hi
  */
 
-public class AutomateBase {
+public class AutomateOperation {
 
 	private Automate Automate;
 
-	public static Automate AutomateSimple(String Regex)
-			throws ValidationException {
-
-		if ((!((List<String>) Arrays.asList(Constans.APHABET)).contains(Regex)))
-			throw new ValidationException("Le n'apartient pas a l'alphabet");
-
+	/**
+	 * Construction d'un automate avec un seul symmble
+	 * 
+	 * @param  le symbole
+	 * @return
+	 * @throws ValidationException
+	 */
+	public static Automate AutomateSimple(String Symbole) throws ValidationException {
+         
+		// si le symbole n'apartien pas a l'aphabet erreure
+		if ((!((List<String>) Arrays.asList(Constans.APHABET)).contains(Symbole)))
+			throw new ValidationException("Le n'apartient "+Symbole+" pas a l'alphabet");
+		
+		// cree un automate vierge
 		Automate aut = new Automate(Constans.APHABET);
-
+        
+		// cree deux etats ajoute 1 comme initial et l'autre comme final
 		Etat etat1 = new Etat(1), etat2 = new Etat(2);
 		aut.ajouterUnEtat(etat1);
 		aut.ajouterUnEtatFinal(etat2);
-		aut.ajouterUneTransition(etat1, Regex, etat2);
+		
+		// ajoute un transition entre les 2 
+		aut.ajouterUneTransition(etat1, Symbole, etat2);
 		aut.setInitialState(etat1);
-
 		return aut;
 	}
 
 	/**
 	 * hahaha c'est n'est pas facile
-	 * 
+	 * Construction de Etoil d'un automate
 	 * @param automat
-	 * @return
+	 * @return Automate
 	 * @throws ValidationException
 	 */
 	public static Automate AutomateEtoil(Automate automat)

@@ -1,46 +1,75 @@
 package AutomateRegex;
-
-import java.util.Arrays;
-import java.util.List;
-
-import Utils.Constans;
 import Utils.ValidationException;
 import Automate.Automate;
-import Automate.AutomateBase;
+import Automate.Determinisation;
 import Automate.Etat;
-import Automate.Transformation;
-import Automate.Transitions;
+
+
+/**
+ * Cette classe Synthetise jute les autre classe et verifie si un mot apartient a un automate
+ * 
+ * @author Rivaldes Hi
+ */
 
 public class Verifications {
 
 	private String Mot;
 	private static String alphabet;
 
+
+	/**
+	 * Verifiction si un mot appartient a un automate
+	 * @param  mot
+	 * @param automate
+	 * @return
+	 * @throws ValidationException
+	 */
+	
 	public static boolean ApartientAutomate(String mot, Automate automate)
 			throws ValidationException {
-
-		List<String> alphabe = Arrays.asList(alphabet);
-
+          
+		// si le  mot est vide on verifie le Epsilon a partient apatient a l'aphabet puis on valide
 		if ((mot == null || mot.equals(""))) {
 			if (automate.getFinalStates().contains(automate.getInitialState()))
 				return true;
 			else
 				System.out.println("atend un peu");
-			return false;
 			// les transition etiqueter par epsilon de a au une etat finale
 		}
-		Automate autdeter = Transformation.Determiniser(automate);
 		
-		Transitions transition = autdeter.getTransitionTable();
+		// je cree genere l'automate determiniser
+		Automate autdeter = Determinisation.Determiniser(automate);
 		
+		// je recupere l'etat initiale
 		Etat q= autdeter.getInitialState();
 		
+		//sachant l'automate est determiniser je parcoure juse mon mot et le recupere les transition posible
+		// si la dermerinere Etat est final on est bon sinon sava 
 		for(int i=0;i<mot.length();i++){
 			q = autdeter.getTransitionTable().getTransition(q,mot.charAt(i)+"").get(0);
 			
 		}
 		System.out.println(q);
 		return q.isFinal();
+	}
+	
+	
+	
+
+	public String getMot() {
+		return Mot;
+	}
+
+	public void setMot(String mot) {
+		Mot = mot;
+	}
+
+	public static String getAlphabet() {
+		return alphabet;
+	}
+
+	public static void setAlphabet(String alphabet) {
+		Verifications.alphabet = alphabet;
 	}
 
 }

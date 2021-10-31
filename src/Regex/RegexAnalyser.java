@@ -2,16 +2,14 @@ package Regex;
 
 import Utils.ValidationException;
 import Utils.Constans;
-
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.List;
+
 
 /**
  * Cette classe nous permet d'effectuer les verification possible sur le regex
  * si elle est bien former ou elle appartient mm a l'alphabet
  * 
- * @author Rivaldes Hi
+ * @author Fredy
  */
 public class RegexAnalyser {
 

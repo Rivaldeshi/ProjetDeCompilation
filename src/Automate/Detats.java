@@ -2,6 +2,11 @@ package Automate;
 
 import java.util.List;
 
+/**
+ * Cette classe nous permet de materialiser un Detat dans les affaire de epsilonfermerture la
+ * 
+ * @author Rivaldes Hi
+ */
 public class Detats {
 
 	List<Etat> List ;
