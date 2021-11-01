@@ -1,34 +1,20 @@
 package Main;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Queue;
-
-import Automate.*;
-import AutomateRegex.Verifications;
 import Regex.RegexAnalyser;
+import Regex.TransformRegex;
 import Utils.Brouillon;
-import Utils.Constans;
 import Utils.ValidationException;
-
+import View.MainView;
 public class Main {
 
 	public static void main(String[] args) {
 
-
-System.out.println("sa va coder tres fort");
+		System.out.println("sa va coder fort");
+		MainView main = new MainView();
 		// testAutomate();
 		// Brouillon.testVerif();
 
 		// Brouillon.testPostfix();
-	
-	 
-		//testAutomate();
-		Brouillon.testVerif();
-
-
 		// testTransistion();
 		// testAutomateSimple();
 		// textRegex();

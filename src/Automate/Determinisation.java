@@ -80,6 +80,13 @@ public class Determinisation {
 		// la premier Detat issue de qo  
 		Detats Q0 = new Detats(epsilonFermeture(automat, initials), autdeter.getStates().size());
         
+		// on verifie si Q0 a un etat finale dans lui si oui elle devient aussi finale
+		for(Etat et:epsilonFermeture(automat, initials)){
+			if(et.isFinal()){
+				Q0.Etat.setIsFinal();
+			}
+		}
+		
 		// on ajoute l'etat comme initial a l'automate une fois
 		autdeter.ajouterUnEtat(Q0.Etat);
 		autdeter.setInitialState(Q0.Etat);
@@ -104,7 +111,6 @@ public class Determinisation {
 
 					// calclue epsilone fermature
 					List<Etat> u = epsilonFermeture(automat, transiter);
-					
 					//verifie si la Detats trouver existe deja
 					boolean contains = true;
 					for (int i = 0; i < detats.size(); i++) {
@@ -130,6 +136,9 @@ public class Determinisation {
 						autdeter.ajouterUnEtat(Q.Etat);
 						autdeter.ajouterUneTransition(deta.Etat, Sym, Q.Etat);
 						Detat.add(Q);
+						if(detats.size()>50){
+							throw new ValidationException("Determinisation a echouer je ne sais pas pourquoir ");
+						}
 					}
 				}
 			}

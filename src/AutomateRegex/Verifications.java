@@ -28,15 +28,7 @@ public class Verifications {
 	public static boolean ApartientAutomate(String mot, Automate automate)
 			throws ValidationException {
           
-		// si le  mot est vide on verifie le Epsilon a partient apatient a l'aphabet puis on valide
-		if ((mot == null || mot.equals(""))) {
-			if (automate.getFinalStates().contains(automate.getInitialState()))
-				return true;
-			else
-				System.out.println("atend un peu");
-			// les transition etiqueter par epsilon de a au une etat finale
-		}
-		
+
 		// je cree genere l'automate determiniser
 		Automate autdeter = Determinisation.Determiniser(automate);
 		

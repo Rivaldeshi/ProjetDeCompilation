@@ -35,7 +35,8 @@ public class TransformRegex {
 				}
 
 			} else {
-				while (!stack.isEmpty() && prioritaire(c) < prioritaire(stack.peek())) {
+				while (!stack.isEmpty()
+						&& prioritaire(c) < prioritaire(stack.peek())) {
 					result += stack.pop();
 				}
 				stack.push(c);
@@ -67,14 +68,19 @@ public class TransformRegex {
 
 	public static Automate evaluateRegex(String Regex)
 			throws ValidationException {
+
+		if (Regex == null || Regex.equals("")) {
+			throw new ValidationException("l'espression reguliere est vide");
+		}
+		Regex= metreLesoperteur(Regex);
 		String exp = infixToPostfix(Regex);
-		
+
 		Stack<Automate> stack = new Stack<Automate>();
-	    List<String> alphabet= Arrays.asList(Constans.APHABET);
-		
+		List<String> alphabet = Arrays.asList(Constans.APHABET);
+
 		for (int i = 0; i < exp.length(); i++) {
 			char c = exp.charAt(i);
-			if (alphabet.contains(c+""))
+			if (alphabet.contains(c + ""))
 				stack.push(sim(c + ""));
 
 			else if (c == '*') {
@@ -86,7 +92,7 @@ public class TransformRegex {
 
 				switch (c) {
 				case '+':
-					stack.push(ou(a,b ));
+					stack.push(ou(a, b));
 					break;
 				case '.':
 					stack.push(conca(a, b));
@@ -95,6 +101,22 @@ public class TransformRegex {
 			}
 		}
 		return stack.pop();
+	}
+
+	public static String metreLesoperteur(String regEx) {
+		String formeAvecOperateur = "";
+		
+		for (int i = 0; i < regEx.length(); i++) {
+			if (regEx.charAt(i) == '(' || Character.isLetter(regEx.charAt(i)) ) {
+				if (i - 1 >= 0) {
+					if (regEx.charAt(i - 1) != '(' && regEx.charAt(i - 1) != '+')
+						formeAvecOperateur += ".";
+				}
+			}
+			formeAvecOperateur += regEx.charAt(i);
+		}
+
+		return formeAvecOperateur;
 	}
 
 	public static Automate ou(Automate a1, Automate a2)

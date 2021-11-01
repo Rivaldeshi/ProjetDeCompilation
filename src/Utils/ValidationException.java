@@ -4,7 +4,7 @@ package Utils;
 public class ValidationException extends Exception {
 	
 	
-	ValidationException(){
+	public ValidationException(){
 		super();
 	}
 	public ValidationException(String s){
