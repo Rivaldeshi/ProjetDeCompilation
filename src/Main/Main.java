@@ -25,7 +25,7 @@ public class Main {
 
 	public static void textRegex() {
 		String expressionReguliere = "+)(a+b)";
-		char[] alphabet = { 'a', 'b', 'c' };
+		String[] alphabet = { "a", "b", "c" };
 		RegexAnalyser reg = null;
 		try {
 			reg = new RegexAnalyser(expressionReguliere, alphabet);

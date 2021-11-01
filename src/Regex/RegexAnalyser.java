@@ -14,9 +14,9 @@ import java.util.Arrays;
 public class RegexAnalyser {
 
 	private String regex;
-	private char[] alphabet;
+	private String[] alphabet;
 
-	public RegexAnalyser(String regex, char[] alphabet) throws ValidationException {
+	public RegexAnalyser(String regex, String[] alphabet) throws ValidationException {
 		this.setRegex(regex);
 
 		if (alphabet.length == 0) {
@@ -86,11 +86,11 @@ public class RegexAnalyser {
 		return true;
 	}
 
-	public char[] getAlphabet() {
+	public String[] getAlphabet() {
 		return alphabet;
 	}
 
-	public void setAlphabet(char[] alphabet) {
+	public void setAlphabet( String[]  alphabet) {
 		this.alphabet = alphabet;
 	}
 

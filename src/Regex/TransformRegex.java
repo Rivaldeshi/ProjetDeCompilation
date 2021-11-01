@@ -13,6 +13,9 @@ public class TransformRegex {
 
 	public static String infixToPostfix(String exp) throws ValidationException {
 
+		RegexAnalyser.verifySiRegexEstBienParentheser(new RegexAnalyser(exp,
+				Constans.APHABET));
+
 		String result = new String("");
 
 		Stack<Character> stack = new Stack<>();
@@ -72,7 +75,7 @@ public class TransformRegex {
 		if (Regex == null || Regex.equals("")) {
 			throw new ValidationException("l'espression reguliere est vide");
 		}
-		Regex= metreLesoperteur(Regex);
+		Regex = metreLesoperteur(Regex);
 		String exp = infixToPostfix(Regex);
 
 		Stack<Automate> stack = new Stack<Automate>();
@@ -105,11 +108,12 @@ public class TransformRegex {
 
 	public static String metreLesoperteur(String regEx) {
 		String formeAvecOperateur = "";
-		
+
 		for (int i = 0; i < regEx.length(); i++) {
-			if (regEx.charAt(i) == '(' || Character.isLetter(regEx.charAt(i)) ) {
+			if (regEx.charAt(i) == '(' || Character.isLetter(regEx.charAt(i))) {
 				if (i - 1 >= 0) {
-					if (regEx.charAt(i - 1) != '(' && regEx.charAt(i - 1) != '+')
+					if (regEx.charAt(i - 1) != '('
+							&& regEx.charAt(i - 1) != '+')
 						formeAvecOperateur += ".";
 				}
 			}
