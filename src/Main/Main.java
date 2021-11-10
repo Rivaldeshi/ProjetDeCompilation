@@ -5,6 +5,7 @@ import Regex.TransformRegex;
 import Utils.Brouillon;
 import Utils.ValidationException;
 import View.MainView;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -17,22 +18,21 @@ public class Main {
 		// Brouillon.testPostfix();
 		// testTransistion();
 		// testAutomateSimple();
-		// textRegex();
+		textRegex();
 
-		Brouillon.test();
+		// Brouillon.test();
 
 	}
 
 	public static void textRegex() {
-		String expressionReguliere = "+)(a+b)";
+		String expressionReguliere = "a.b(a+c)+d";
 		String[] alphabet = { "a", "b", "c" };
 		RegexAnalyser reg = null;
 		try {
 			reg = new RegexAnalyser(expressionReguliere, alphabet);
-			// RegexAnalyser.verifySiRegexApartientALaphabet(reg); (ne fonctione
-			// pas encor)
-			RegexAnalyser.verifySiRegexEstBienFormer(reg);
-			RegexAnalyser.verifySiRegexEstBienParentheser(reg);
+			RegexAnalyser.verifySiRegexApartientALaphabet(reg);
+			// RegexAnalyser.verifySiRegexEstBienFormer(reg);
+			// RegexAnalyser.verifySiRegexEstBienParentheser(reg);
 
 		} catch (ValidationException e) {
 			System.out.println(e.getMessage());

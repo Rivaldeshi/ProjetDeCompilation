@@ -20,39 +20,38 @@ public class AutomateOperation {
 	/**
 	 * Construction d'un automate avec un seul symmble
 	 * 
-	 * @param  le symbole
+	 * @param le symbole
 	 * @return
 	 * @throws ValidationException
 	 */
 	public static Automate AutomateSimple(String Symbole) throws ValidationException {
-         
+
 		// si le symbole n'apartien pas a l'aphabet erreure
 		if ((!((List<String>) Arrays.asList(Constans.APHABET)).contains(Symbole)))
-			throw new ValidationException("Le n'apartient "+Symbole+" pas a l'alphabet");
-		
+			throw new ValidationException("Le Symbole n'apartient " + Symbole + " pas a l'alphabet");
+
 		// cree un automate vierge
 		Automate aut = new Automate(Constans.APHABET);
-        
+
 		// cree deux etats ajoute 1 comme initial et l'autre comme final
 		Etat etat1 = new Etat(1), etat2 = new Etat(2);
 		aut.ajouterUnEtat(etat1);
 		aut.ajouterUnEtatFinal(etat2);
-		
-		// ajoute un transition entre les 2 
+
+		// ajoute un transition entre les 2
 		aut.ajouterUneTransition(etat1, Symbole, etat2);
 		aut.setInitialState(etat1);
 		return aut;
 	}
 
 	/**
-	 * hahaha c'est n'est pas facile
-	 * Construction de Etoil d'un automate
+	 * hahaha c'est n'est pas facile Construction de Etoil d'un automate
+	 * 
 	 * @param automat
 	 * @return Automate
 	 * @throws ValidationException
 	 */
-	public static Automate AutomateEtoil(Automate automat)
-			throws ValidationException {
+	public static Automate AutomateEtoil(Automate automat) throws ValidationException {
 
 		Automate aut = new Automate(Constans.APHABET);
 
@@ -63,7 +62,6 @@ public class AutomateOperation {
 		Etat oldinitial = automat.getInitialState();
 		// je rend n'est plus initial
 		oldinitial.setInitial(false);
-
 
 		// j'ajoute le nouveau a l'automate en cour de construction
 		aut.ajouterUnEtat(newinitial);
@@ -83,22 +81,20 @@ public class AutomateOperation {
 		aut.ajouterUneTransition(newinitial, Constans.EPSILON, oldinitial);
 
 		Etat finall = new Etat(aut.getStates().size());
-		
+
 		aut.ajouterUnEtatFinal(finall);
 		aut.ajouterUneTransition(newinitial, Constans.EPSILON, finall);
 
 		automat.getStates().get(automat.getStates().size() - 1).setFinal(false);
-		aut.getFinalStates().remove(automat.getStates().get(automat.getStates().size() - 1));;
-		
-		aut.ajouterUneTransition(
-				automat.getStates().get(automat.getStates().size() - 1),
-				Constans.EPSILON, finall);
+		aut.getFinalStates().remove(automat.getStates().get(automat.getStates().size() - 1));
+		;
+
+		aut.ajouterUneTransition(automat.getStates().get(automat.getStates().size() - 1), Constans.EPSILON, finall);
 
 		// je remet les transistion que l'ancient automate avait
 		for (Etat etat : automat.getStates()) {
 			for (String Etiquet : Constans.APHABET) {
-				for (Etat et1 : automat.getTransitionTable().getTransition(
-						etat, Etiquet)) {
+				for (Etat et1 : automat.getTransitionTable().getTransition(etat, Etiquet)) {
 					aut.ajouterUneTransition(etat, Etiquet, et1);
 				}
 			}
@@ -106,8 +102,7 @@ public class AutomateOperation {
 		return aut;
 	}
 
-	public static Automate AutomatePoint(Automate automat1, Automate automat2)
-			throws ValidationException {
+	public static Automate AutomatePoint(Automate automat1, Automate automat2) throws ValidationException {
 
 		Automate res = new Automate(Constans.APHABET);
 
@@ -117,11 +112,10 @@ public class AutomateOperation {
 		}
 
 		res.setInitialState(automat1.getInitialState());
-		
+
 		automat1.getFinalStates().get(0).setFinal(false);
 		res.getFinalStates().remove(automat1.getFinalStates().get(0));
-		
-	
+
 		automat2.getInitialState().setInitial(false);
 		// j'ajoute les automate de etat du deuxieme automate
 		for (Etat et : automat2.getStates()) {
@@ -129,21 +123,18 @@ public class AutomateOperation {
 		}
 
 		// je met le pont
-		res.ajouterUneTransition(automat1.getFinalStates().get(0), Constans.EPSILON,
-				automat2.getInitialState());
+		res.ajouterUneTransition(automat1.getFinalStates().get(0), Constans.EPSILON, automat2.getInitialState());
 
 		for (Etat etat : automat1.getStates()) {
 			for (String Etiquet : Constans.APHABET) {
-				for (Etat et1 : automat1.getTransitionTable().getTransition(
-						etat, Etiquet)) {
+				for (Etat et1 : automat1.getTransitionTable().getTransition(etat, Etiquet)) {
 					res.ajouterUneTransition(etat, Etiquet, et1);
 				}
 			}
 		}
 		for (Etat etat : automat2.getStates()) {
 			for (String Etiquet : Constans.APHABET) {
-				for (Etat et1 : automat2.getTransitionTable().getTransition(
-						etat, Etiquet)) {
+				for (Etat et1 : automat2.getTransitionTable().getTransition(etat, Etiquet)) {
 					res.ajouterUneTransition(etat, Etiquet, et1);
 				}
 			}
@@ -152,8 +143,7 @@ public class AutomateOperation {
 		return res;
 	}
 
-	public static Automate AutomatePlus(Automate automat1, Automate automat2)
-			throws ValidationException {
+	public static Automate AutomatePlus(Automate automat1, Automate automat2) throws ValidationException {
 
 		Automate res = new Automate(Constans.APHABET);
 
@@ -173,39 +163,31 @@ public class AutomateOperation {
 			res.ajouterUnEtat(et.SetState(res.getStates().size()));
 		}
 
-		res.ajouterUneTransition(newinitial, Constans.EPSILON,
-				automat1.getInitialState());
+		res.ajouterUneTransition(newinitial, Constans.EPSILON, automat1.getInitialState());
 		automat1.getInitialState().setInitial(false);
 
-		res.ajouterUneTransition(newinitial, Constans.EPSILON,
-				automat2.getInitialState());
+		res.ajouterUneTransition(newinitial, Constans.EPSILON, automat2.getInitialState());
 		automat2.getInitialState().setInitial(false);
 
 		Etat finall = new Etat(res.getStates().size());
 		res.ajouterUnEtatFinal(finall);
-		
-		res.ajouterUneTransition(automat1.getFinalStates().get(0), Constans.EPSILON,
-				finall);
+
+		res.ajouterUneTransition(automat1.getFinalStates().get(0), Constans.EPSILON, finall);
 		automat1.getFinalStates().get(0).setFinal(false);
 
-		
-
-		res.ajouterUneTransition(automat2.getFinalStates().get(0), Constans.EPSILON,
-				finall);
+		res.ajouterUneTransition(automat2.getFinalStates().get(0), Constans.EPSILON, finall);
 		automat2.getFinalStates().get(0).setFinal(false);
-		
+
 		for (Etat etat : automat1.getStates()) {
 			for (String Etiquet : Constans.APHABET) {
-				for (Etat et1 : automat1.getTransitionTable().getTransition(
-						etat, Etiquet)) {
+				for (Etat et1 : automat1.getTransitionTable().getTransition(etat, Etiquet)) {
 					res.ajouterUneTransition(etat, Etiquet, et1);
 				}
 			}
 		}
 		for (Etat etat : automat2.getStates()) {
 			for (String Etiquet : Constans.APHABET) {
-				for (Etat et1 : automat2.getTransitionTable().getTransition(
-						etat, Etiquet)) {
+				for (Etat et1 : automat2.getTransitionTable().getTransition(etat, Etiquet)) {
 					res.ajouterUneTransition(etat, Etiquet, et1);
 				}
 			}
