@@ -11,16 +11,16 @@ public class Main {
 	public static void main(String[] args) {
 
 		System.out.println("sa va coder fort");
-		MainView main = new MainView();
+		// MainView main = new MainView();
 		// testAutomate();
 		// Brouillon.testVerif();
 
 		// Brouillon.testPostfix();
 		// testTransistion();
 		// testAutomateSimple();
-		textRegex();
+		// textRegex();
 
-		// Brouillon.test();
+		Brouillon.testAutomate();
 
 	}
 

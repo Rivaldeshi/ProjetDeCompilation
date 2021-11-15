@@ -10,6 +10,7 @@ import Automate.AutomateOperation;
 import Automate.Determinisation;
 import Automate.Etat;
 import AutomateRegex.Verifications;
+import Automate.Minimiser;
 
 public class Brouillon {
 
@@ -25,8 +26,7 @@ public class Brouillon {
 
 		try {
 			aut.ajouterUneTransition(etat1, "a", etat2);
-			aut.ajouterUneTransition(etat1, Constans.APHABET_PAR_DEFAUT[0],
-					etat2);
+			aut.ajouterUneTransition(etat1, Constans.APHABET_PAR_DEFAUT[0], etat2);
 		} catch (ValidationException e) {
 			e.printStackTrace();
 		}
@@ -53,14 +53,13 @@ public class Brouillon {
 	// test expresion regulierer (a+b)*abb;
 	public static void testAutomate() {
 		try {
-			Automate aut = conca(
-					conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")),
-							sim("b")), sim("b"));
+			Automate aut = conca(conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")), sim("b")), sim("b"));
 
 			List<Etat> detas = new ArrayList<Etat>();
 			detas.add(aut.getInitialState());
 			Determinisation.epsilonFermeture(aut, detas);
 			Determinisation.Determiniser(aut);
+			Minimiser.minimisation(Determinisation.Determiniser(aut));
 
 		} catch (ValidationException e) {
 			// TODO Auto-generated catch block
@@ -70,9 +69,7 @@ public class Brouillon {
 
 	public static void testVerif() {
 		try {
-			Automate aut = conca(
-					conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")),
-							sim("b")), sim("b"));
+			Automate aut = conca(conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")), sim("b")), sim("b"));
 			// Automate aut = etoil(sim(""));
 
 			System.out.println(aut.getTransitionTable());
@@ -88,23 +85,19 @@ public class Brouillon {
 		Scanner sc = new Scanner(System.in);
 		try {
 
-			System.out
-					.print("Entrer un expression reguliere Bien former  :   ");
+			System.out.print("Entrer un expression reguliere Bien former  :   ");
 			String regex = sc.nextLine();
-           
-			
+
 			Automate aut = TransformRegex.evaluateRegex(regex);
 			System.out.println(aut.getTransitionTable());
-			
+
 			System.out.println();
 
 			System.out.print("Entrer un mot :   ");
 
 			String mot = sc.nextLine();
-			
+
 			System.out.println();
-			
-			
 
 			Verifications.ApartientAutomate(mot, aut);
 
@@ -127,13 +120,11 @@ public class Brouillon {
 		}
 	}
 
-	public static Automate ou(Automate a1, Automate a2)
-			throws ValidationException {
+	public static Automate ou(Automate a1, Automate a2) throws ValidationException {
 		return AutomateOperation.AutomatePlus(a1, a2);
 	}
 
-	public static Automate conca(Automate a1, Automate a2)
-			throws ValidationException {
+	public static Automate conca(Automate a1, Automate a2) throws ValidationException {
 		return AutomateOperation.AutomatePoint(a1, a2);
 	}
 
@@ -144,7 +135,6 @@ public class Brouillon {
 	public static Automate etoil(Automate a1) throws ValidationException {
 		return AutomateOperation.AutomateEtoil(a1);
 	}
-
 
 	public static void testAutomateCompilquer() {
 
