@@ -5,14 +5,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.JPanel;
 
 import Automate.Automate;
 import AutomateRegex.Verifications;
+import Regex.RegexAnalyser;
 import Regex.TransformRegex;
 import SwingComponent.*;
+import Utils.Constans;
 import Utils.ValidationException;
 
 public class MainView {
@@ -24,11 +27,11 @@ public class MainView {
 		frame = new Frame();
 
 		final Text expr = new Text(0, 0);
-		final Label lexpr = new Label("Entrer l'expression");
+		final Label lexpr = new Label("Entrer l'expression  ");
 
 		final Text mot = new Text(0, 0);
-		Label lmot = new Label("Entrer l'expression");
-
+		Label lmot = new Label("Entrer le mot          ");
+		
 		Panel pexpr = new Panel(lexpr, expr);
 		Panel pmot = new Panel(lmot, mot);
 
@@ -53,6 +56,8 @@ public class MainView {
 
 		verif.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Constans.APHABET = RegexAnalyser
+						.ChercherAphabetApartireDuRegex(expr.getText());
 				erreur.setText("");
 				res.setText("");
 				try {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Utils.Constans;
 import Utils.ValidationException;
+
 /**
  * Cette classe nous permet d'effectuer les tache de base d'un automate
  * 
@@ -42,13 +43,13 @@ public class Automate {
 	}
 
 	public void ajouterUnEtat(Etat state) {
-		if(state.isFinal()){
+		if (state.isFinal()) {
 			this.finalStates.add(state);
 		}
 		this.states.add(state);
 		transitionTable.AjouterEtat(state);
 	}
-	
+
 	public void ajouterUnEtatFinal(Etat state) {
 		ajouterUnEtat(state);
 		state.setIsFinal();

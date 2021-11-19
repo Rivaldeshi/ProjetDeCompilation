@@ -1,7 +1,6 @@
 package Main;
 
 import Regex.RegexAnalyser;
-import Regex.TransformRegex;
 import Utils.Brouillon;
 import Utils.ValidationException;
 import View.MainView;
@@ -11,17 +10,18 @@ public class Main {
 	public static void main(String[] args) {
 
 		System.out.println("sa va coder fort");
+		MainView main = new MainView();
 		// MainView main = new MainView();
 		// testAutomate();
 		// Brouillon.testVerif();
-
 		// Brouillon.testPostfix();
 		// testTransistion();
 		// testAutomateSimple();
 		// textRegex();
+		// Brouillon.testConcact();
+		// Brouillon.test();
 
-		Brouillon.testAutomate();
-
+		//Brouillon.testAutomate();
 	}
 
 	public static void textRegex() {

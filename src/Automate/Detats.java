@@ -3,28 +3,28 @@ package Automate;
 import java.util.List;
 
 /**
- * Cette classe nous permet de materialiser un Detat dans les affaire de epsilonfermerture la
+ * Cette classe nous permet de materialiser un Detat dans les affaire de
+ * epsilonfermerture la
  * 
  * @author Rivaldes Hi
  */
 public class Detats {
 
-	List<Etat> List ;
+	List<Etat> List;
 	Etat Etat;
 	boolean estMarquer;
-	
-	Detats(List<Etat> list2, int etat){
-		this.List=list2;
+
+	Detats(List<Etat> list2, int etat) {
+		this.List = list2;
 		this.Etat = new Etat(etat);
 	}
-	
+
 	public String toString() {
-	
-		return  "{ "+this.Etat+" = "+List+" est marquer "+estMarquer+"  }" ;
+
+		return "{ " + this.Etat + " = " + List + " est marquer " + estMarquer + "  }";
 
 	}
-	
-	
+
 	@Override
 	public boolean equals(Object o) {
 		@SuppressWarnings("unchecked")
@@ -38,5 +38,5 @@ public class Detats {
 		}
 		return true;
 	}
-	
+
 }

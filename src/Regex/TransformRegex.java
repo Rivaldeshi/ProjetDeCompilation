@@ -76,6 +76,7 @@ public class TransformRegex {
 			throw new ValidationException("l'espression reguliere est vide");
 		}
 		Regex = metreLesoperteur(Regex);
+
 		String exp = infixToPostfix(Regex);
 
 		Stack<Automate> stack = new Stack<Automate>();
@@ -87,12 +88,26 @@ public class TransformRegex {
 				stack.push(sim(c + ""));
 
 			else if (c == '*') {
-				Automate aut = stack.pop();
+				Automate aut;
+				try {
+					aut = stack.pop();
+				} catch (Exception e) {
+					throw new ValidationException(
+							"L'Etoil ne peut etre en debut d'un expression reguliere");
+				}
+
 				stack.push(etoil(aut));
 			} else {
-				Automate b = stack.pop();
-				Automate a = stack.pop();
+				Automate b;
+				Automate a;
 
+				try {
+					b = stack.pop();
+					a = stack.pop();
+				} catch (Exception e) {
+					throw new ValidationException(
+							"L'expression reguliere la mon amis est mal former");
+				}
 				switch (c) {
 				case '+':
 					stack.push(ou(a, b));

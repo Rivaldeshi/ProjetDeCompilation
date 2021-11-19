@@ -2,6 +2,8 @@ package Regex;
 
 import Utils.ValidationException;
 import Utils.Constans;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -15,7 +17,8 @@ public class RegexAnalyser {
 	private String regex;
 	private String[] alphabet;
 
-	public RegexAnalyser(String regex, String[] alphabet) throws ValidationException {
+	public RegexAnalyser(String regex, String[] alphabet)
+			throws ValidationException {
 		this.setRegex(regex);
 
 		if (alphabet.length == 0) {
@@ -29,9 +32,13 @@ public class RegexAnalyser {
 	 * 
 	 * @return
 	 */
-	public static Boolean verifySiRegexEstBienParentheser(RegexAnalyser expression) throws ValidationException {
+	public static Boolean verifySiRegexEstBienParentheser(
+			RegexAnalyser expression) throws ValidationException {
 		int i = 0, j = 0;
-		char[] symboles = expression.regex.toCharArray(); // je convertir l'objet string en un tableau de char
+		char[] symboles = expression.regex.toCharArray(); // je convertir
+															// l'objet string en
+															// un tableau de
+															// char
 		for (char elt : symboles) {
 			if (elt == '(')
 				i++;
@@ -43,21 +50,25 @@ public class RegexAnalyser {
 		if (i == j)
 			return true;
 		else {
-			throw new ValidationException("expression reguliere mal parrentheser");
+			throw new ValidationException(
+					"expression reguliere mal parrentheser");
 		}
 
 	}
 
 	/**
-	 * cette fonction verifier si l'expression reguliere est bien former du genre
-	 * elle ne commence pas par un operateur ou une parrenthese fermante et plus et
-	 * pluss
+	 * cette fonction verifier si l'expression reguliere est bien former du
+	 * genre elle ne commence pas par un operateur ou une parrenthese fermante
+	 * et plus et pluss
 	 * 
 	 * @return
 	 */
-	public static Boolean verifySiRegexEstBienFormer(RegexAnalyser monRegex) throws ValidationException {
+	public static Boolean verifySiRegexEstBienFormer(RegexAnalyser monRegex)
+			throws ValidationException {
 		char[] symboles = monRegex.regex.toCharArray();
-		if (Arrays.asList(Constans.OPERATEUR_PAR_DEFAUT).contains(String.valueOf(symboles[0])) | symboles[0] == ')')
+		if (Arrays.asList(Constans.OPERATEUR_PAR_DEFAUT).contains(
+				String.valueOf(symboles[0]))
+				| symboles[0] == ')')
 			throw new ValidationException("expression reguliere mal former ");
 		// on va completer apres avoir bien manger
 
@@ -71,7 +82,8 @@ public class RegexAnalyser {
 	 * 
 	 * @return
 	 */
-	public static Boolean verifySiRegexApartientALaphabet(RegexAnalyser monRegex) throws ValidationException {
+	public static Boolean verifySiRegexApartientALaphabet(RegexAnalyser monRegex)
+			throws ValidationException {
 		char[] symboles = monRegex.regex.toCharArray();
 		for (char elt : symboles) {
 			if ((!(Arrays.asList(monRegex.alphabet).contains(String.valueOf(elt)))
@@ -85,6 +97,24 @@ public class RegexAnalyser {
 
 		}
 		return true;
+	}
+
+	public static String[] ChercherAphabetApartireDuRegex(String monRegex){
+	
+		String[] alph = monRegex.split("");
+		ArrayList<String> alphabet = new ArrayList<String>();
+
+		for (String s : alph) {
+			if (Character.isLetter(s.charAt(0))
+					&& !alphabet.contains(s.charAt(0) + "")) {
+				alphabet.add(s);
+			}
+		}
+		String[] arr = new String[alphabet.size() + 1];
+		arr = alphabet.toArray(arr);
+		arr[alphabet.size()] = Constans.EPSILON;
+
+		return arr;
 	}
 
 	public String[] getAlphabet() {

@@ -54,13 +54,9 @@ public class Brouillon {
 	public static void testAutomate() {
 		try {
 			Automate aut = conca(conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")), sim("b")), sim("b"));
-
-			List<Etat> detas = new ArrayList<Etat>();
-			detas.add(aut.getInitialState());
-			Determinisation.epsilonFermeture(aut, detas);
-			Determinisation.Determiniser(aut);
-			Minimiser.minimisation(Determinisation.Determiniser(aut));
-
+			aut = Determinisation.Determiniser(aut);
+			aut = Minimiser.minimisation(aut);
+            System.out.println(aut.getTransitionTable());
 		} catch (ValidationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,6 +96,7 @@ public class Brouillon {
 			System.out.println();
 
 			Verifications.ApartientAutomate(mot, aut);
+			sc.close();
 
 		} catch (ValidationException e) {
 			// TODO Auto-generated catch block
@@ -120,6 +117,16 @@ public class Brouillon {
 		}
 	}
 
+	public static void testConcact() {
+		try {
+			Automate a1 = conca(ou(sim("a"), sim("b")), sim("b"));
+			// Automate a2 = ou(sim("a"), sim("b"));
+			System.out.println(a1.getTransitionTable());
+		} catch (ValidationException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static Automate ou(Automate a1, Automate a2) throws ValidationException {
 		return AutomateOperation.AutomatePlus(a1, a2);
 	}
@@ -134,21 +141,6 @@ public class Brouillon {
 
 	public static Automate etoil(Automate a1) throws ValidationException {
 		return AutomateOperation.AutomateEtoil(a1);
-	}
-
-	public static void testAutomateCompilquer() {
-
-		try {
-			Automate automat1 = AutomateOperation.AutomateSimple("a");
-			Automate automat2 = AutomateOperation.AutomateSimple("b");
-			Automate aut = AutomateOperation.AutomatePlus(automat1, automat2);
-
-			System.out.println(aut.getTransitionTable());
-			System.out.println(aut.getStates().size());
-		} catch (ValidationException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 }

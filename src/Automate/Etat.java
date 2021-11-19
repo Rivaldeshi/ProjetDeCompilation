@@ -3,6 +3,10 @@ package Automate;
 public class Etat {
 
 	private int State;
+	private boolean isFinal = false;
+	private boolean isInitial = false;
+	
+	
 	public int getState() {
 		return State;
 	}
@@ -11,8 +15,7 @@ public class Etat {
 		State = state;
 	}
 
-	private boolean isFinal = false;
-	private boolean isInitial = false;
+	
 
 	public Etat(int state) {
 		this.State = state;

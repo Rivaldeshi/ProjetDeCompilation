@@ -15,7 +15,7 @@ public class Verifications {
 
 	private String Mot;
 	private static String alphabet;
-
+    public static String trace="";
 
 	/**
 	 * Verifiction si un mot appartient a un automate
@@ -27,21 +27,21 @@ public class Verifications {
 	
 	public static boolean ApartientAutomate(String mot, Automate automate)
 			throws ValidationException {
-          
+		trace="";
 
 		// je cree genere l'automate determiniser
 		Automate autdeter = Determinisation.Determiniser(automate);
 		
 		// je recupere l'etat initiale
 		Etat q= autdeter.getInitialState();
-		
+		trace+= " -> "+q;
 		//sachant l'automate est determiniser je parcoure juse mon mot et le recupere les transition posible
 		// si la dermerinere Etat est final on est bon sinon sava 
 		for(int i=0;i<mot.length();i++){
 			q = autdeter.getTransitionTable().getTransition(q,mot.charAt(i)+"").get(0);
-			
+			trace+= " -> "+q;
 		}
-		System.out.println(q.isFinal());
+		System.out.println(trace);
 		return q.isFinal();
 	}
 	
