@@ -2,7 +2,7 @@ package Utils;
 
 public class Constans {
 	
-	public final static String EPSILON ="EPSILON" ;
+	public final static String EPSILON ="E" ;
 	
 	public final static String[] APHABET_PAR_DEFAUT= {"a","b","c",EPSILON};
 	

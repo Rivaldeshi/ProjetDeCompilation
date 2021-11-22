@@ -1,16 +1,22 @@
 package Utils;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JPanel;
+
 import Regex.TransformRegex;
+import SwingComponent.Frame;
+import SwingComponent.Panel;
 import Automate.Automate;
 import Automate.AutomateOperation;
 import Automate.Determinisation;
 import Automate.Etat;
 import AutomateRegex.Verifications;
 import Automate.Minimiser;
+import DrawAutomate.Draw;
 
 public class Brouillon {
 
@@ -26,7 +32,8 @@ public class Brouillon {
 
 		try {
 			aut.ajouterUneTransition(etat1, "a", etat2);
-			aut.ajouterUneTransition(etat1, Constans.APHABET_PAR_DEFAUT[0], etat2);
+			aut.ajouterUneTransition(etat1, Constans.APHABET_PAR_DEFAUT[0],
+					etat2);
 		} catch (ValidationException e) {
 			e.printStackTrace();
 		}
@@ -53,10 +60,12 @@ public class Brouillon {
 	// test expresion regulierer (a+b)*abb;
 	public static void testAutomate() {
 		try {
-			Automate aut = conca(conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")), sim("b")), sim("b"));
+			Automate aut = conca(
+					conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")),
+							sim("b")), sim("b"));
 			aut = Determinisation.Determiniser(aut);
 			aut = Minimiser.minimisation(aut);
-            System.out.println(aut.getTransitionTable());
+			System.out.println(aut.getTransitionTable());
 		} catch (ValidationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -65,10 +74,34 @@ public class Brouillon {
 
 	public static void testVerif() {
 		try {
-			Automate aut = conca(conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")), sim("b")), sim("b"));
+			Automate aut = conca(
+					conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")),
+							sim("b")), sim("b"));
 			// Automate aut = etoil(sim(""));
 
 			System.out.println(aut.getTransitionTable());
+
+		} catch (ValidationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void testDessin() {
+		try {
+			Automate aut = conca(
+					conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")),
+							sim("b")), sim("b"));
+			Panel pan = Draw.drawAutomate(aut);
+
+		//	Panel pan1 = Draw.drawAutomate(Determinisation.Determiniser(aut));
+
+			Frame frame = new Frame();
+
+			frame.add(pan);
+			//frame.add(pan1);
+
+			frame.setVisible(true);
 
 		} catch (ValidationException e) {
 			// TODO Auto-generated catch block
@@ -81,7 +114,8 @@ public class Brouillon {
 		Scanner sc = new Scanner(System.in);
 		try {
 
-			System.out.print("Entrer un expression reguliere Bien former  :   ");
+			System.out
+					.print("Entrer un expression reguliere Bien former  :   ");
 			String regex = sc.nextLine();
 
 			Automate aut = TransformRegex.evaluateRegex(regex);
@@ -127,11 +161,13 @@ public class Brouillon {
 		}
 	}
 
-	public static Automate ou(Automate a1, Automate a2) throws ValidationException {
+	public static Automate ou(Automate a1, Automate a2)
+			throws ValidationException {
 		return AutomateOperation.AutomatePlus(a1, a2);
 	}
 
-	public static Automate conca(Automate a1, Automate a2) throws ValidationException {
+	public static Automate conca(Automate a1, Automate a2)
+			throws ValidationException {
 		return AutomateOperation.AutomatePoint(a1, a2);
 	}
 
