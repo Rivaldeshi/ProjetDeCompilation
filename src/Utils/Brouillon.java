@@ -92,7 +92,7 @@ public class Brouillon {
 			Automate aut = ou(sim("a"),sim("b"));
 			Panel pan = Draw.drawAutomate(aut);
 
-			Panel pan1 = Draw.drawAutomate(Determinisation.Determiniser(aut));
+			Panel pan1 = Draw.drawAutomate(Determinisation.Determiniser(aut,false));
 
 			Frame frame = new Frame();
 

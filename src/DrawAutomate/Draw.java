@@ -30,7 +30,24 @@ public class Draw {
 		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
 		style.put(mxConstants.STYLE_FILLCOLOR, "#FFFFFF");
 		style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
-		STYLE.putCellStyle("PINK_NONE", style);
+		STYLE.putCellStyle("RIEN", style);
+
+		style = new HashMap<String, Object>();
+		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+		style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
+		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
+		style.put(mxConstants.STYLE_FILLCOLOR, "#FFFFFF");
+		style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+		STYLE.putCellStyle("INITAL", style);
+		
+		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+		style.put(mxConstants.STYLE_FONTCOLOR, "black");
+		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
+		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
+		style.put(mxConstants.STYLE_FILLCOLOR, "red");
+		style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+		STYLE.putCellStyle("FINAL", style);
 
 		style = new HashMap<String, Object>();
 		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
@@ -55,10 +72,21 @@ public class Draw {
 			ArrayList<Object> vertexs = new ArrayList<Object>();
 
 			for (Etat et : automate.getStates()) {
-
-				Object v1 = graph.insertVertex(parent, null, et, 0, 0, 50, 50,
-						"PINK_NONE");
-
+				Object v1;
+				if (et.isFinal() && et.isInitial()) {
+					v1 = graph.insertVertex(parent, null, et, 0, 0, 60, 60,
+							"RIEN");
+				} else if (et.isFinal()) {
+					v1 = graph.insertVertex(parent, null, et, 0, 0, 50, 50,"FINAL");
+				} else if (et.isInitial()) {
+					v1 = graph.insertVertex(parent, null, et, 0, 0, 50, 50,
+							"RIEN");
+					
+				} else {
+					v1 = graph.insertVertex(parent, null, et, 0, 0, 50, 50,
+							"RIEN");
+					
+				}
 				vertexs.add(v1);
 
 			}
@@ -85,8 +113,9 @@ public class Draw {
 
 		layout.setOrientation(SwingConstants.WEST);
 		layout.execute(parent);
+
 		mxGraphComponent graphComponent = new mxGraphComponent(graph);
-		
+
 		graphComponent.getViewport().setOpaque(true);
 		graphComponent.getViewport().setBackground(Color.white);
 		graphComponent.setBorder(BorderFactory.createEmptyBorder());

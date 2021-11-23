@@ -165,9 +165,6 @@ public class Determinisation {
 						autdeter.ajouterUneTransition(deta.Etat, Sym, Q.Etat);
 
 						if (detats.size() > 50) {
-							for (Detats det : detats) {
-								System.out.println(det);
-							}
 							throw new ValidationException(
 									"Determinisation a echouer je ne sais pas pourquoir ");
 						}
@@ -175,7 +172,6 @@ public class Determinisation {
 				}
 			}
 		}
-		System.out.println("autdetermiser = " + autdeter.getTransitionTable());
 		return autdeter;
 	}
 

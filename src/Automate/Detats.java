@@ -1,5 +1,6 @@
 package Automate;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -32,11 +33,8 @@ public class Detats {
 		if (List.size() != l2.size()) {
 			return false;
 		}
-		for (int i = 0; i < List.size(); i++) {
-			if (!this.List.get(i).equals(l2.get(i)))
-				return false;
-		}
-		return true;
+		
+		return new HashSet<>(this.List).equals(new HashSet<>(l2));
 	}
 
 }

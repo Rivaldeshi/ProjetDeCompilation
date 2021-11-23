@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Automate.Automate;
+import Automate.AutomateOperation;
 import Automate.Determinisation;
 import AutomateRegex.Verifications;
 import DrawAutomate.Draw;
@@ -70,15 +71,12 @@ public class MainView {
 					Automate aut = TransformRegex.evaluateRegex(regex);
 					Panel pan = Draw.drawAutomate(aut);
 
-					Panel pan1 = Draw.drawAutomate(Determinisation.Determiniser(aut,false));
-
+					Automate a1= Determinisation.Determiniser(aut,false);
+					Panel pan1 = Draw.drawAutomate(a1);
 					Frame frame1 = new Frame();
-
 					frame1.add(pan);
 					frame1.add(pan1);
-
 					frame1.setVisible(true);
-					System.out.println(aut.getTransitionTable());
 
 					String mot1 = mot.getText();
 

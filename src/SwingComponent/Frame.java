@@ -23,7 +23,7 @@ public class Frame extends JFrame {
 		this.add(title);
 	    this.setSize(Constans.framewidh, Constans.framehight);
 		this.setResizable(false);
-	
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setBackground(Color.white);
