@@ -72,12 +72,12 @@ public class MainView {
 
 					Panel pan1 = Draw.drawAutomate(Determinisation.Determiniser(aut,false));
 
-					Frame frame = new Frame();
+					Frame frame1 = new Frame();
 
-					frame.add(pan);
-					frame.add(pan1);
+					frame1.add(pan);
+					frame1.add(pan1);
 
-					frame.setVisible(true);
+					frame1.setVisible(true);
 					System.out.println(aut.getTransitionTable());
 
 					String mot1 = mot.getText();

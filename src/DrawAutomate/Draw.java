@@ -29,6 +29,7 @@ public class Draw {
 		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
 		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
 		style.put(mxConstants.STYLE_FILLCOLOR, "#FFFFFF");
+		style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
 		STYLE.putCellStyle("PINK_NONE", style);
 
 		style = new HashMap<String, Object>();
@@ -37,7 +38,6 @@ public class Draw {
 		style.put(mxConstants.STYLE_VERTICAL_ALIGN, mxConstants.ALIGN_LEFT);
 		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
 		style.put(mxConstants.STYLE_STROKECOLOR, "black");
-		style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
 		STYLE.setDefaultEdgeStyle(style);
 	}
 
@@ -84,11 +84,9 @@ public class Draw {
 		mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
 
 		layout.setOrientation(SwingConstants.WEST);
-
 		layout.execute(parent);
-
 		mxGraphComponent graphComponent = new mxGraphComponent(graph);
-
+		
 		graphComponent.getViewport().setOpaque(true);
 		graphComponent.getViewport().setBackground(Color.white);
 		graphComponent.setBorder(BorderFactory.createEmptyBorder());
