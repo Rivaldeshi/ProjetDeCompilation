@@ -105,7 +105,7 @@ public class RegexAnalyser {
 		ArrayList<String> alphabet = new ArrayList<String>();
 
 		for (String s : alph) {
-			if (Character.isLetter(s.charAt(0))
+			if (Character.isLetterOrDigit(s.charAt(0))
 					&& !alphabet.contains(s.charAt(0) + "")) {
 				alphabet.add(s);
 			}

@@ -36,32 +36,39 @@ public class Determinisation {
 		// c'est juste l'algorithme du coure faur=t lire page 78 on a juste mit
 		// la boucle
 		for (Etat etat : etats) {
-            if(!etatEpsilonesque.contains(etat)){
-			etatEpsilonesque.add(etat);
-			Stack<Etat> pile = new Stack<Etat>();
-			List<Etat> transitiondirect = aut.getTransitionTable()
-					.getTransition(etat, Constans.EPSILON);
+			if (!etatEpsilonesque.contains(etat)) {
+				etatEpsilonesque.add(etat);
+				Stack<Etat> pile = new Stack<Etat>();
+				List<Etat> transitiondirect = aut.getTransitionTable()
+						.getTransition(etat, Constans.EPSILON);
 
-			for (Etat et : transitiondirect) {
-				etatEpsilonesque.add(et);
-				pile.push(et);
-			}
-
-			while (!pile.empty()) {
-
-				Etat t = pile.pop();
-				List<Etat> transition = aut.getTransitionTable().getTransition(
-						t, Constans.EPSILON);
-				for (Etat et : transition) {
-					if (!etatEpsilonesque.contains(et)) {
-						etatEpsilonesque.add(et);
-						pile.push(et);
-					}
+				for (Etat et : transitiondirect) {
+					etatEpsilonesque.add(et);
+					pile.push(et);
 				}
 
+				while (!pile.empty()) {
+
+					Etat t = pile.pop();
+					List<Etat> transition = aut.getTransitionTable()
+							.getTransition(t, Constans.EPSILON);
+					for (Etat et : transition) {
+						if (!etatEpsilonesque.contains(et)) {
+							etatEpsilonesque.add(et);
+							pile.push(et);
+						}
+					}
+
+				}
 			}
-		}}
+		}
 		return etatEpsilonesque;
+	}
+
+	public static Automate Determiniser(Automate automat)
+			throws ValidationException {
+		return Determiniser(automat, true);
+
 	}
 
 	/**
@@ -71,7 +78,7 @@ public class Determinisation {
 	 *            automate en question
 	 * 
 	 */
-	public static Automate Determiniser(Automate automat)
+	public static Automate Determiniser(Automate automat, boolean complet)
 			throws ValidationException {
 
 		// creation du nouveau automate
@@ -125,6 +132,9 @@ public class Determinisation {
 
 					// calclue epsilone fermature
 					List<Etat> u = epsilonFermeture(automat, transiter);
+					if (u.size() == 0 && !complet) {
+						continue;
+					}
 					// verifie si la Detats trouver existe deja
 					boolean contains = true;
 					for (int i = 0; i < detats.size(); i++) {
@@ -155,10 +165,11 @@ public class Determinisation {
 						autdeter.ajouterUneTransition(deta.Etat, Sym, Q.Etat);
 
 						if (detats.size() > 50) {
-							for(Detats det : detats){
+							for (Detats det : detats) {
 								System.out.println(det);
 							}
-							throw new ValidationException("Determinisation a echouer je ne sais pas pourquoir ");
+							throw new ValidationException(
+									"Determinisation a echouer je ne sais pas pourquoir ");
 						}
 					}
 				}

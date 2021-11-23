@@ -8,10 +8,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Automate.Automate;
+import Automate.Determinisation;
 import AutomateRegex.Verifications;
+import DrawAutomate.Draw;
 import Regex.RegexAnalyser;
 import Regex.TransformRegex;
 import SwingComponent.*;
@@ -25,13 +28,14 @@ public class MainView {
 	public MainView() {
 
 		frame = new Frame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		final Text expr = new Text(0, 0);
 		final Label lexpr = new Label("Entrer l'expression  ");
 
 		final Text mot = new Text(0, 0);
 		Label lmot = new Label("Entrer le mot          ");
-		
+
 		Panel pexpr = new Panel(lexpr, expr);
 		Panel pmot = new Panel(lmot, mot);
 
@@ -64,6 +68,16 @@ public class MainView {
 					String regex = expr.getText();
 
 					Automate aut = TransformRegex.evaluateRegex(regex);
+					Panel pan = Draw.drawAutomate(aut);
+
+					Panel pan1 = Draw.drawAutomate(Determinisation.Determiniser(aut,false));
+
+					Frame frame = new Frame();
+
+					frame.add(pan);
+					frame.add(pan1);
+
+					frame.setVisible(true);
 					System.out.println(aut.getTransitionTable());
 
 					String mot1 = mot.getText();

@@ -89,7 +89,7 @@ public class Brouillon {
 
 	public static void testDessin() {
 		try {
-			Automate aut =ou(conca(conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")),sim("b")), sim("b")),conca(conca(conca(etoil(ou(sim("a"), sim("b"))), sim("a")),sim("b")), sim("b")));
+			Automate aut = ou(sim("a"),sim("b"));
 			Panel pan = Draw.drawAutomate(aut);
 
 			Panel pan1 = Draw.drawAutomate(Determinisation.Determiniser(aut));

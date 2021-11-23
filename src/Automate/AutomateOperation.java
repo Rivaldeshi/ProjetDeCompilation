@@ -102,7 +102,6 @@ public class AutomateOperation {
 		return aut;
 	}
 
-	
 	public static Automate AutomatePoint(Automate automat1, Automate automat2) throws ValidationException {
 
 		Automate res = new Automate(Constans.APHABET);
@@ -113,11 +112,10 @@ public class AutomateOperation {
 		}
 
 		res.setInitialState(automat1.getInitialState());
-       
-		
+
 		automat1.getFinalStates().get(0).setFinal(false);
 		res.getFinalStates().remove(automat1.getFinalStates().get(0));
-		
+
 		automat2.getInitialState().setInitial(false);
 		// j'ajoute les automate de etat du deuxieme automate
 		for (Etat et : automat2.getStates()) {
@@ -142,7 +140,12 @@ public class AutomateOperation {
 			}
 		}
 
+		if (automat1.getStates().size() == 2 && automat2.getStates().size() == 2) {
+			return Determinisation.Determiniser(res, false);
+		}
+
 		return res;
+
 	}
 
 	public static Automate AutomatePlus(Automate automat1, Automate automat2) throws ValidationException {
@@ -177,7 +180,7 @@ public class AutomateOperation {
 		res.ajouterUneTransition(automat1.getFinalStates().get(0), Constans.EPSILON, finall);
 		automat1.getFinalStates().get(0).setFinal(false);
 		res.getFinalStates().remove(automat1.getFinalStates().get(0));
-		
+
 		res.ajouterUneTransition(automat2.getFinalStates().get(0), Constans.EPSILON, finall);
 		automat2.getFinalStates().get(0).setFinal(false);
 		res.getFinalStates().remove(automat2.getFinalStates().get(0));

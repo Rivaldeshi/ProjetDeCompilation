@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		System.out.println("sa va coder fort");
-	   //MainView main = new MainView();
+	   MainView main = new MainView();
 		// MainView main = new MainView();
 		// testAutomate();
 		// Brouillon.testVerhif();
@@ -23,7 +23,7 @@ public class Main {
 
 		//Brouillon.testAutomate();
 		
-		Brouillon.testDessin();
+		//Brouillon.testDessin();
 	}
 
 	public static void textRegex() {

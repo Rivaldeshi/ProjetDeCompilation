@@ -125,7 +125,7 @@ public class TransformRegex {
 		String formeAvecOperateur = "";
 
 		for (int i = 0; i < regEx.length(); i++) {
-			if (regEx.charAt(i) == '(' || Character.isLetter(regEx.charAt(i))) {
+			if (regEx.charAt(i) == '(' || Character.isLetterOrDigit(regEx.charAt(i))) {
 				if (i - 1 >= 0) {
 					if (regEx.charAt(i - 1) != '('
 							&& regEx.charAt(i - 1) != '+')

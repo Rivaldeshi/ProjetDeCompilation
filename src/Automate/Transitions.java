@@ -55,7 +55,7 @@ public class Transitions extends
 		
 		   List<String> valid = Arrays.asList(Alphabet);
 		   
-		   if(!Character.isLetter(Etiquet.charAt(0))){
+		   if(!Character.isLetterOrDigit(Etiquet.charAt(0))){
 			   throw new ValidationException("L'etiquet \""+Etiquet+"\" n'est pas un carractere de l'alphabet");
 		   }
 		   
