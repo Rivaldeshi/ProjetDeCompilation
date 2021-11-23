@@ -129,20 +129,29 @@ public class Minimiser {
                     // si la partition na qu'un etat
                     if (part.size() == 1) {
                         int contenu = 0;// cette variable vas me dire si sur un symbole de lalphabet la trasition de mon
-                                        // etat donne un etat qui est seule dans sa transition
+                                        // etat donne un etat qui est seule dans sa partition
                         for (List part2 : MesPartitions) {
-                            if (part2.contains(aut.getTransitionTable().getTransition(etat, symb).get(0))
-                                    && part2.size() == 1) {
+                            if (part2.contains(aut.getTransitionTable().getTransition(etat, symb).get(0))) {
+
                                 contenu = 1;
-                                break;
 
                             }
                         }
-                        // si letat donne un etat qui est seul dans sa partition apres transition sur un
+
+                        // si letat donne un etat qui est dans une partition apres transition sur un
                         // symbole de lalpahbet j'ajoute cette transition a ma tabe de transition
                         if (contenu == 1) {
-                            transitionTable.AjouterTransition(etat, symb,
+                            System.out.println("je teste :" + etat + " sur " + symb + " donne "
+                                    + aut.getTransitionTable().getTransition(etat, symb).get(0));
+                            autMinimiser.ajouterUnEtat(etat);
+                            // autMinimiser.ajouterUnEtat(aut.getTransitionTable().getTransition(etat,
+                            // symb).get(0));
+                            autMinimiser.ajouterUneTransition(etat, symb,
                                     aut.getTransitionTable().getTransition(etat, symb).get(0));
+                        } else {
+                            throw new ValidationException("pourquoi  la transition de l'etat :" + etat
+                                    + " sur le symbole : " + symb + " ne donne aucun etat ?");
+
                         }
                     }
 
@@ -150,6 +159,7 @@ public class Minimiser {
             }
 
         }
+        System.out.println("la table de transition de lautomate minimise est : " + autMinimiser.getTransitionTable());
         return autMinimiser;
     }
 
