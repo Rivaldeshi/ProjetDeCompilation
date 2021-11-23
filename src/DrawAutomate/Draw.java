@@ -1,39 +1,22 @@
 package DrawAutomate;
 
-import javax.swing.JFrame;
-
 import Automate.Automate;
 import Automate.Etat;
-import SwingComponent.Label;
 import SwingComponent.Panel;
 import Utils.Constans;
 import Utils.ValidationException;
-
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxPerimeter;
 import com.mxgraph.view.mxStylesheet;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-import com.mxgraph.layout.mxIGraphLayout;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
-import com.mxgraph.util.mxCellRenderer;
 import com.mxgraph.util.mxConstants;
+
 
 public class Draw {
 
@@ -41,22 +24,58 @@ public class Draw {
 
 	static {
 		HashMap<String, Object> style = new HashMap<String, Object>();
-
-		style = new HashMap<String, Object>();
-		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-		style.put(mxConstants.STYLE_OPACITY, 50);
+		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_TRIANGLE);
 		style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
 		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
 		style.put(mxConstants.STYLE_VERTICAL_ALIGN, mxConstants.ALIGN_BOTTOM);
 		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
 		style.put(mxConstants.STYLE_FILLCOLOR, "#FFFFFF");
+		style.put(mxConstants.STYLE_STROKECOLOR, "#E3A646");
+		STYLE.putCellStyle("PINK_INIT", style);
+
+		style = new HashMap<String, Object>();
+		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE);
+		style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
+		style.put(mxConstants.STYLE_VERTICAL_ALIGN, mxConstants.ALIGN_BOTTOM);
+		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
+		style.put(mxConstants.STYLE_FILLCOLOR, "#E34646");
+		style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
+		STYLE.putCellStyle("PINK_FINAL", style);
+
+		style = new HashMap<String, Object>();
+		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_DOUBLE_ELLIPSE);
+		style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
+		style.put(mxConstants.STYLE_VERTICAL_ALIGN, mxConstants.ALIGN_BOTTOM);
+		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
+		style.put(mxConstants.STYLE_FILLCOLOR, "#E34646");
+		style.put(mxConstants.STYLE_STROKECOLOR, "#E3A646");
+		STYLE.putCellStyle("PINK_BOTH", style);
+
+		style = new HashMap<String, Object>();
+		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+		style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
+		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
+		style.put(mxConstants.STYLE_FILLCOLOR, "#FFFFFF");
 		style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
 		STYLE.putCellStyle("PINK_NONE", style);
 
+		style = new HashMap<String, Object>();
+		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
+		style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_CLASSIC);
+		style.put(mxConstants.STYLE_VERTICAL_ALIGN, mxConstants.ALIGN_LEFT);
+		
+		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
+		style.put(mxConstants.STYLE_STROKECOLOR, "black");
+		style.put(mxConstants.STYLE_FONTCOLOR, "#000000");
+		STYLE.setDefaultEdgeStyle(style);
 	}
 
 	public static Panel drawAutomate(Automate automate)
 			throws ValidationException {
+	
 		// Creates graph with model
 		mxGraph graph = new mxGraph();
 		graph.setStylesheet(STYLE);
@@ -69,8 +88,7 @@ public class Draw {
 
 			for (Etat et : automate.getStates()) {
 
-				Object v1 = graph.insertVertex(parent, null, et, 240, 150, 40,
-						20, "PINK_NONE");
+				Object v1 = graph.insertVertex(parent, null, et, 0, 0, 50,50, "PINK_NONE");
 
 				vertexs.add(v1);
 
@@ -93,14 +111,14 @@ public class Draw {
 		}
 
 		Panel pan = new Panel();
-		
 
 		mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
 
 		layout.setOrientation(SwingConstants.WEST);
+		
 
 		layout.execute(parent);
-		
+
 		mxGraphComponent graphComponent = new mxGraphComponent(graph);
 
 		graphComponent.getViewport().setOpaque(true);
