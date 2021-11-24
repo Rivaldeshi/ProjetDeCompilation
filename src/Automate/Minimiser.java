@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.ArrayDeque;
 
-import Utils.Constans;
-import Utils.ValidationException;
-
 public class Minimiser {
 
     /**
@@ -42,8 +39,6 @@ public class Minimiser {
         // j'ajoute d'abord les deux partitions a la partition final
         nonTraiter.add(partition1);
         nonTraiter.add(partition2);
-        System.out.println("\nVoici les deux parttions de departs : ");
-        System.out.println(nonTraiter);
         // je commencer a traiter les partitions
         while (!nonTraiter.isEmpty()) {
             // on travaill sur une partition s'il a plus d'un etat
@@ -110,16 +105,12 @@ public class Minimiser {
 
         }
 
-        // j'affiche mes partition
-        System.out.println("voici les partitions creer apres la theorie du congossa :");
-
-        System.out.println(MesPartitions);
-
+    
         // maintenant on cree la table de transition de l'automate minimiser a partir de
         // la table de transition de l'AFD
         // table de transition vide
         // je parcours mes partitons
-        for (List part : MesPartitions) {
+        for (List<Etat> part : MesPartitions) {
             // je prend le premiere element dans chaque partitons
             Etat etat = (Etat) part.get(0);
 
@@ -131,7 +122,7 @@ public class Minimiser {
                         int contenu = 0;// cette variable vas me dire si sur un symbole de lalphabet la trasition de mon
                                         // etat donne un etat qui est seule dans sa partition
                         List<Etat> partition = new ArrayList<Etat>();
-                        for (List part2 : MesPartitions) {
+                        for (List<Etat> part2 : MesPartitions) {
                             if (part2.contains(aut.getTransitionTable().getTransition(etat, symb).get(0))) {
                                 partition = part2;
 
@@ -172,7 +163,6 @@ public class Minimiser {
 
         }
         autMinimiser.setInitialState(aut.getInitialState());
-        System.out.println("la table de transition de lautomate minimise est : " + autMinimiser.getTransitionTable());
         return autMinimiser;
     }
 

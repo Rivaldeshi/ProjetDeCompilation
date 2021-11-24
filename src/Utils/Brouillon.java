@@ -1,12 +1,7 @@
 package Utils;
 
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
-
-import javax.swing.JPanel;
-
 import Regex.TransformRegex;
 import SwingComponent.Frame;
 import SwingComponent.Panel;

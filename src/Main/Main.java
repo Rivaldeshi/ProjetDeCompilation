@@ -1,7 +1,6 @@
 package Main;
 
 import Regex.RegexAnalyser;
-import Utils.Brouillon;
 import Utils.ValidationException;
 import View.MainView;
 
@@ -10,7 +9,8 @@ public class Main {
 	public static void main(String[] args) {
 
 		System.out.println("sa va coder fort");
-	   MainView main = new MainView();
+	   @SuppressWarnings("unused")
+	MainView main = new MainView();
 		// MainView main = new MainView();
 		// testAutomate();
 		// Brouillon.testVerhif();

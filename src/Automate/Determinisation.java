@@ -164,10 +164,6 @@ public class Determinisation {
 						autdeter.ajouterUnEtat(Q.Etat);
 						autdeter.ajouterUneTransition(deta.Etat, Sym, Q.Etat);
 
-						if (detats.size() > 50) {
-							throw new ValidationException(
-									"Determinisation a echouer je ne sais pas pourquoir ");
-						}
 					}
 				}
 			}

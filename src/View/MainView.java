@@ -1,102 +1,19 @@
 package View;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import Automate.Automate;
-import Automate.AutomateOperation;
-import Automate.Determinisation;
-import AutomateRegex.Verifications;
-import DrawAutomate.Draw;
-import Regex.RegexAnalyser;
-import Regex.TransformRegex;
-import SwingComponent.*;
-import Utils.Constans;
-import Utils.ValidationException;
+import SwingComponent.Frame;
 
 public class MainView {
 
 	public Frame frame;
+	public static Automate AutomateCourant;
+	public static Menu menu = new Menu("hello");
 
 	public MainView() {
 
 		frame = new Frame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		final Text expr = new Text(0, 0);
-		final Label lexpr = new Label("Entrer l'expression  ");
-
-		final Text mot = new Text(0, 0);
-		Label lmot = new Label("Entrer le mot          ");
-
-		Panel pexpr = new Panel(lexpr, expr);
-		Panel pmot = new Panel(lmot, mot);
-
-		Panel p = new Panel();
-
-		Button verif = new Button("Verifier", 0);
-
-		final Label res = new Label("");
-		final Label erreur = new Label("");
-
-		erreur.setForeground(Color.red);
-		res.setForeground(Color.white);
-		p.add(pexpr);
-		p.add(pmot);
-		p.add(res);
-
-		JPanel p1 = new JPanel();
-		p1.setBackground(Color.black);
-		p1.add(verif);
-		p.add(p1);
-		p.add(erreur);
-
-		verif.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Constans.APHABET = RegexAnalyser
-						.ChercherAphabetApartireDuRegex(expr.getText());
-				erreur.setText("");
-				res.setText("");
-				try {
-					String regex = expr.getText();
-
-					Automate aut = TransformRegex.evaluateRegex(regex);
-					Panel pan = Draw.drawAutomate(aut);
-
-					Automate a1= Determinisation.Determiniser(aut,false);
-					Panel pan1 = Draw.drawAutomate(a1);
-					Frame frame1 = new Frame();
-					frame1.add(pan);
-					frame1.add(pan1);
-					frame1.setVisible(true);
-
-					String mot1 = mot.getText();
-
-					if (Verifications.ApartientAutomate(mot1, aut)) {
-						res.setForeground(Color.GREEN);
-						res.setText("appatient au language");
-					} else {
-						res.setForeground(Color.red);
-						res.setText("n'appatient pas au language");
-					}
-					;
-
-				} catch (ValidationException e1) {
-					// TODO Auto-generated catch block
-					erreur.setText(e1.getMessage());
-					e1.printStackTrace();
-				}
-			}
-		});
-		frame.add(p);
+		Verification verif = new Verification();
+		frame = new Frame(verif, menu);
 		frame.pack();
 		frame.setVisible(true);
 

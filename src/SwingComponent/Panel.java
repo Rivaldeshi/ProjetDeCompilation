@@ -23,7 +23,7 @@ public class Panel extends JPanel {
 		this.setAlignmentX(CENTER_ALIGNMENT);
 		this.setBackground(Color.black);
 		this.setPreferredSize(new Dimension(Constans.framewidh,
-				Constans.framehight-300));
+				Constans.framehight));
 	}
 
 	public Panel(String s) {
