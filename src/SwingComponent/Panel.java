@@ -29,7 +29,7 @@ public class Panel extends JPanel {
 
 	public Panel(String s) {
 		this();
-		titre = new Titre(s, 30);
+		titre = new Titre("<html>"+s+"</html>", 30);
 		titre.setBackground(Color.BLUE);
 		titre.setForeground(Color.WHITE);
 		titre.setOpaque(true);
@@ -49,7 +49,7 @@ public class Panel extends JPanel {
 
 	public Panel(String s, boolean a) {
 		this();
-		titre = new Titre(s, 30);
+		titre = new Titre("<html>"+s+"</html>", 30);
 		titre.setBackground(Color.ORANGE);
 		titre.setOpaque(true);
 		this.add(titre);
