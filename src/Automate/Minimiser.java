@@ -118,11 +118,11 @@ public class Minimiser {
         // maintenant on cree la table de transition de l'automate minimiser a partir de
         // la table de transition de l'AFD
         // table de transition vide
-        Transitions transitionTable = new Transitions(aut.getAlphabet());
         // je parcours mes partitons
         for (List part : MesPartitions) {
             // je prend le premiere element dans chaque partitons
             Etat etat = (Etat) part.get(0);
+
             // je parours lalphabet sauf epsilone
             for (String symb : aut.getAlphabet()) {
                 if (!symb.equals(Constans.EPSILON)) {
@@ -130,27 +130,39 @@ public class Minimiser {
                     if (part.size() == 1) {
                         int contenu = 0;// cette variable vas me dire si sur un symbole de lalphabet la trasition de mon
                                         // etat donne un etat qui est seule dans sa partition
+                        List<Etat> partition = new ArrayList<Etat>();
                         for (List part2 : MesPartitions) {
                             if (part2.contains(aut.getTransitionTable().getTransition(etat, symb).get(0))) {
+                                partition = part2;
 
                                 contenu = 1;
-
                             }
                         }
 
                         // si letat donne un etat qui est dans une partition apres transition sur un
                         // symbole de lalpahbet j'ajoute cette transition a ma tabe de transition
                         if (contenu == 1) {
-                            System.out.println("je teste :" + etat + " sur " + symb + " donne "
-                                    + aut.getTransitionTable().getTransition(etat, symb).get(0));
-                            autMinimiser.ajouterUnEtat(etat);
-                            // autMinimiser.ajouterUnEtat(aut.getTransitionTable().getTransition(etat,
-                            // symb).get(0));
-                            autMinimiser.ajouterUneTransition(etat, symb,
-                                    aut.getTransitionTable().getTransition(etat, symb).get(0));
+                            if (!autMinimiser.getStates().contains(etat)) {
+                                autMinimiser.ajouterUnEtat(etat);
+                            }
+                            autMinimiser.ajouterUneTransition(etat, symb, partition.get(0));
                         } else {
                             throw new ValidationException("pourquoi  la transition de l'etat :" + etat
                                     + " sur le symbole : " + symb + " ne donne aucun etat ?");
+
+                        }
+                    } else {// si la taille de la partition depasse un
+                        if (part.contains(aut.getTransitionTable().getTransition(etat, symb).get(0))) {
+                            if (!autMinimiser.getStates().contains(etat)) {
+                                autMinimiser.ajouterUnEtat(etat);
+                            }
+                            autMinimiser.ajouterUneTransition(etat, symb, etat);
+                        } else {
+                            if (!autMinimiser.getStates().contains(etat)) {
+                                autMinimiser.ajouterUnEtat(etat);
+                            }
+                            autMinimiser.ajouterUneTransition(etat, symb,
+                                    aut.getTransitionTable().getTransition(etat, symb).get(0));
 
                         }
                     }
@@ -159,6 +171,7 @@ public class Minimiser {
             }
 
         }
+        autMinimiser.setInitialState(aut.getInitialState());
         System.out.println("la table de transition de lautomate minimise est : " + autMinimiser.getTransitionTable());
         return autMinimiser;
     }
