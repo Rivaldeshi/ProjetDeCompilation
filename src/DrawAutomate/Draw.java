@@ -5,21 +5,27 @@ import Automate.Etat;
 import SwingComponent.Panel;
 import Utils.Constans;
 import Utils.ValidationException;
+
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxPerimeter;
 import com.mxgraph.view.mxStylesheet;
+
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.SwingConstants;
+
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.util.mxConstants;
 
 public class Draw {
 
-	private static final mxStylesheet STYLE = new mxStylesheet();
+	public static final mxStylesheet STYLE = new mxStylesheet();
 
 	static {
 		HashMap<String, Object> style = new HashMap<String, Object>();
@@ -127,8 +133,9 @@ public class Draw {
 			graph.getModel().endUpdate();
 		}
 
-		Panel pan = nom.equals("") ? new Panel() : new Panel(nom);
-
+		Panel pan = nom.equals("") ? new Panel() : new Panel(nom +" de "+"\""+Constans.expressionCourant+"\"");
+         
+		pan.add(Box.createRigidArea(new Dimension(50, 50)));
 		mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
 
 		layout.setOrientation(SwingConstants.WEST);
@@ -137,13 +144,13 @@ public class Draw {
 		mxGraphComponent graphComponent = new mxGraphComponent(graph);
 
 		graphComponent.getViewport().setOpaque(true);
-		graphComponent.getViewport().setBackground(Color.white);
+		
+		graphComponent.getViewport().setBackground(Color.WHITE);
 		graphComponent.setBorder(BorderFactory.createEmptyBorder());
 		graphComponent.setEnabled(false);
 		pan.setBackground(Color.white);
 		pan.add(graphComponent);
 
 		return pan;
-
 	}
 }

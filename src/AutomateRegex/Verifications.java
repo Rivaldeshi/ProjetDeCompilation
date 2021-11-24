@@ -1,4 +1,5 @@
 package AutomateRegex;
+import Utils.Constans;
 import Utils.ValidationException;
 import Automate.Automate;
 import Automate.Determinisation;
@@ -41,7 +42,7 @@ public class Verifications {
 			q = autdeter.getTransitionTable().getTransition(q,mot.charAt(i)+"").get(0);
 			trace+= " -> "+q;
 		}
-		System.out.println(trace);
+		Constans.chemin=trace;
 		return q.isFinal();
 	}
 	

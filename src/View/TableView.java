@@ -5,19 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-
 import Utils.ValidationException;
 import Automate.Automate;
 import Automate.AutomateOperation;
 import Automate.Determinisation;
 import Automate.Minimiser;
-import DrawAutomate.Draw;
 import SwingComponent.Header;
 import SwingComponent.Panel;
 import SwingComponent.TitreButton;
 
 @SuppressWarnings("serial")
-public class AutomateView extends Panel {
+public class TableView extends Panel {
 
 	public static Panel menu = new Panel();
 
@@ -27,14 +25,14 @@ public class AutomateView extends Panel {
 	public static TitreButton AFDC = new TitreButton("AFD Complet");
 	public static TitreButton AFDComple = new TitreButton("AFD Bar");
 
-	Panel footer = new Panel(); 
+	Panel footer = new Panel();
 
-	AutomateView(final Automate automate) throws ValidationException {
+	TableView(final Automate automate) throws ValidationException {
 
 		super();
 		unsetfocus();
 		AFN.focus();
-		footer.add(Draw.drawAutomate(automate, "Automate Non deterministe"));
+		footer.add(DrawTable.Draw(automate, "Automate Non deterministe"));
 		List<TitreButton> heads = new ArrayList<TitreButton>();
 		heads.add(AFN);
 		heads.add(AFDI);
@@ -63,32 +61,32 @@ public class AutomateView extends Panel {
 					if (e.getSource() == AFN) {
 						footer.removeAll();
 						AFN.focus();
-						footer.add(Draw.drawAutomate(automate,
+						footer.add(DrawTable.Draw(automate,
 								"Automate Non deterministe"));
 						footer.revalidate();
 					} else if (e.getSource() == AFDI) {
 						footer.removeAll();
 						AFDI.focus();
-						footer.add(Draw
-								.drawAutomate(determiniserI,
+						footer.add(DrawTable
+								.Draw(determiniserI,
 										"Automate deterministe Incomplet (sans etat puit) "));
 						footer.revalidate();
 					} else if (e.getSource() == AFDC) {
 						footer.removeAll();
 						AFDC.focus();
-						footer.add(Draw
-								.drawAutomate(determiniserC,
+						footer.add(DrawTable
+								.Draw(determiniserC,
 										"Automate deterministe Complet (avec etat puit)"));
 						footer.revalidate();
 					} else if (e.getSource() == MINISER) {
 						footer.removeAll();
-						footer.add(Draw.drawAutomate(Minimal,
-								"Automate Minimale  Complet de AFD  "));
+						footer.add(DrawTable.Draw(Minimal,
+								"Automate Minimale  Complet de AFD De "));
 						MINISER.focus();
 						footer.revalidate();
 					} else if (e.getSource() == AFDComple) {
 						footer.removeAll();
-						footer.add(Draw.drawAutomate(complemantaire,
+						footer.add(DrawTable.Draw(complemantaire,
 								"Automate Complementaire  InComplet de AFD"));
 						AFDComple.focus();
 						footer.revalidate();

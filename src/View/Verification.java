@@ -21,9 +21,11 @@ public class Verification extends Panel {
 	Verification() {
 		super("Verifcation si un mot appartient a un languade");
 		final Text expr = new Text(0, 0);
+		expr.setText(Constans.expressionCourant);
 		final Label lexpr = new Label("Entrer l'expression  ");
 
 		final Text mot = new Text(0, 0);
+		mot.setText(Constans.motCourant);
 		Label lmot = new Label("Entrer le mot          ");
 
 		Panel pexpr = new Panel(lexpr, expr);
@@ -34,40 +36,59 @@ public class Verification extends Panel {
 
 		final Label res = new Label("");
 		final Label erreur = new Label("");
+		final Label chemin = new Label("");
 
 		erreur.setForeground(Color.red);
 		res.setForeground(Color.white);
+
 		p.add(pexpr);
 		p.add(pmot);
 		p.add(res);
+		
+		chemin.setForeground(Color.BLUE);
 
 		JPanel p1 = new JPanel();
 		p1.setBackground(Color.black);
 		p1.add(verif);
 		p.add(p1);
 		p.add(erreur);
+		p.add(chemin);
 
 		verif.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Constans.APHABET = RegexAnalyser
-						.ChercherAphabetApartireDuRegex(expr.getText());
+
 				erreur.setText("");
 				res.setText("");
 				try {
 					String regex = expr.getText();
+					String mot1 = mot.getText();
+
+					Constans.expressionCourant = regex;
+
+					if (regex.length() == 0)
+						throw new ValidationException(
+								"EXpression reguliere est vide");
+					Constans.APHABET = RegexAnalyser
+							.ChercherAphabetApartireDuRegex(expr.getText());
+
+					Constans.motCourant = mot1;
 
 					Automate aut = TransformRegex.evaluateRegex(regex);
-					MainView.AutomateCourant=aut;
+					MainView.AutomateCourant = aut;
 					MainView.menu.bon();
-					String mot1 = mot.getText();
+
 					if (Verifications.ApartientAutomate(mot1, aut)) {
 						res.setForeground(Color.GREEN);
 						res.setText("appatient au language");
 					} else {
 						res.setForeground(Color.red);
 						res.setText("n'appatient pas au language");
-					};
-                  
+					}
+					;
+
+					chemin.setText("Le chemin pris par le mot dans L'AFD est : "
+							+ "" + Constans.chemin);
+
 				} catch (ValidationException e1) {
 					erreur.setText(e1.getMessage());
 					e1.printStackTrace();

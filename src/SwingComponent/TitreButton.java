@@ -1,5 +1,6 @@
 package SwingComponent;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 @SuppressWarnings("serial")
@@ -12,6 +13,11 @@ public class TitreButton extends Button {
 	 public TitreButton(String s){
 		 super(s);
 		 
+	 }
+	 
+	 public void focus(){
+			this.setBackground(Color.black);
+		this.setForeground(Color.white);
 	 }
 	public Dimension getMaximumSize(){
 		Dimension d = super.getMaximumSize();

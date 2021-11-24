@@ -61,6 +61,7 @@ public class Minimiser {
                                 // // j'ajoute l'etat a la liste des trahisseurs de la partition
                                 if (!l.contains(etat)) {
                                     l.add(etat);
+                                    
 
                                 }
                                 partitionInter.remove(etat);
@@ -104,8 +105,6 @@ public class Minimiser {
             }
 
         }
-
-    
         // maintenant on cree la table de transition de l'automate minimiser a partir de
         // la table de transition de l'AFD
         // table de transition vide

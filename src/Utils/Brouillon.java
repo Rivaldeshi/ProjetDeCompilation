@@ -2,9 +2,11 @@ package Utils;
 
 
 import java.util.Scanner;
+
 import Regex.TransformRegex;
 import SwingComponent.Frame;
 import SwingComponent.Panel;
+import View.DrawTable;
 import Automate.Automate;
 import Automate.AutomateOperation;
 import Automate.Determinisation;
@@ -75,6 +77,19 @@ public class Brouillon {
 			// Automate aut = etoil(sim(""));
 
 			System.out.println(aut.getTransitionTable());
+
+		} catch (ValidationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void testTable() {
+		try {
+			Automate aut = ou(sim("a"), sim("b"));
+			// Automate aut = etoil(sim("a"));
+
+			DrawTable.Draw(aut,"AFN");
 
 		} catch (ValidationException e) {
 			// TODO Auto-generated catch block

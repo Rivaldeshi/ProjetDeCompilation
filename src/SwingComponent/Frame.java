@@ -27,7 +27,6 @@ public class Frame extends JFrame {
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
 		this.setLocationRelativeTo(null);
 		this.getContentPane().setBackground(Color.white);
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 	}
 

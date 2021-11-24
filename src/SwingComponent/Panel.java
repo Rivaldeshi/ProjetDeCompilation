@@ -3,12 +3,13 @@ package SwingComponent;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-
+import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
 import Utils.Constans;
@@ -60,6 +61,17 @@ public class Panel extends JPanel {
 		l.setForeground(Color.white);
 		this.add(l);
 		this.add(b);
+	}
+	
+	public Panel(JScrollPane graph, Label l) {
+		super();
+		this.setBackground(Color.white);
+		this.setLayout(new FlowLayout(300));
+		this.setFont(new Font("serif", Font.ITALIC, 30));
+		l.setForeground(Color.BLUE);
+		this.add(new Label("         "));
+		this.add(graph);
+		this.add(l);
 	}
 
 	public Panel(String s, String s1) {

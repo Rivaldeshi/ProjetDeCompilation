@@ -59,12 +59,8 @@ public class Transitions extends
 			   throw new ValidationException("L'etiquet \""+Etiquet+"\" n'est pas un carractere de l'alphabet");
 		   }
 		   
-		   if (valid.contains(Etiquet)) {
-			   return this.get(et).get(Etiquet);
-			} else {
-			   throw new ValidationException("L'etiquet \""+Etiquet+"\" de la transition n'apartient pas a l'alphabet");
-			}
-		
+		   return this.get(et).get(Etiquet);
+			
 	}
 
 }

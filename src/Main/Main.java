@@ -9,8 +9,8 @@ public class Main {
 	public static void main(String[] args) {
 
 		System.out.println("sa va coder fort");
-	   @SuppressWarnings("unused")
-	MainView main = new MainView();
+		@SuppressWarnings("unused")
+		MainView main = new MainView();
 		// MainView main = new MainView();
 		// testAutomate();
 		// Brouillon.testVerhif();
@@ -21,9 +21,9 @@ public class Main {
 		// Brouillon.testConcact();
 		// Brouillon.test();
 
-		//Brouillon.testAutomate();
-		
-		//Brouillon.testDessin();
+		// Brouillon.testTable();
+
+		// Brouillon.testDessin();
 	}
 
 	public static void textRegex() {
