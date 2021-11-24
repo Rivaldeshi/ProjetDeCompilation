@@ -40,8 +40,8 @@ public class Draw {
 
 		style = new HashMap<String, Object>();
 		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-		style.put(mxConstants.STYLE_FONTCOLOR, "black");
-		style.put(mxConstants.STYLE_OPACITY, 60);
+		style.put(mxConstants.STYLE_FONTCOLOR, "white");
+		style.put(mxConstants.STYLE_OPACITY, 80);
 		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
 		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
 		style.put(mxConstants.STYLE_FILLCOLOR, "green");
@@ -50,8 +50,8 @@ public class Draw {
 
 		style = new HashMap<String, Object>();
 		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-		style.put(mxConstants.STYLE_FONTCOLOR, "black");
-		style.put(mxConstants.STYLE_OPACITY, 60);
+		style.put(mxConstants.STYLE_FONTCOLOR, "white");
+		style.put(mxConstants.STYLE_OPACITY, 80);
 		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
 		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
 		style.put(mxConstants.STYLE_FILLCOLOR, "red");
@@ -60,8 +60,8 @@ public class Draw {
 
 		style = new HashMap<String, Object>();
 		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-		style.put(mxConstants.STYLE_FONTCOLOR, "black");
-		style.put(mxConstants.STYLE_OPACITY, 70);
+		style.put(mxConstants.STYLE_FONTCOLOR, "white");
+		style.put(mxConstants.STYLE_OPACITY, 80);
 		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
 		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
 		style.put(mxConstants.STYLE_FILLCOLOR, "blue");
@@ -102,14 +102,14 @@ public class Draw {
 					v1 = graph.insertVertex(parent, null, et, 0, 0, 60, 60,
 							"IF");
 				} else if (et.isFinal()) {
-					v1 = graph.insertVertex(parent, null, et, 0, 0, 50, 50,
+					v1 = graph.insertVertex(parent, null, et, 0, 0, 60, 60,
 							"FINAL");
 				} else if (et.isInitial()) {
-					v1 = graph.insertVertex(parent, null, et, 0, 0, 50, 50,
+					v1 = graph.insertVertex(parent, null, et, 0, 0, 60, 60,
 							"INITIAL");
 
 				} else {
-					v1 = graph.insertVertex(parent, null, et, 0, 0, 50, 50,
+					v1 = graph.insertVertex(parent, null, et, 0, 0, 60, 60,
 							"RIEN");
 
 				}

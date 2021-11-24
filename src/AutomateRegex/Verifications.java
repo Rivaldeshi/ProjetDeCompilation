@@ -1,4 +1,5 @@
 package AutomateRegex;
+import Regex.RegexAnalyser;
 import Utils.Constans;
 import Utils.ValidationException;
 import Automate.Automate;
@@ -28,6 +29,10 @@ public class Verifications {
 	
 	public static boolean ApartientAutomate(String mot, Automate automate)
 			throws ValidationException {
+		
+		if(!RegexAnalyser.verifierSimotApartinentAphabet(mot))
+			throw new ValidationException("Le mot n'apprtient pas a l'alphabet");
+		
 		trace="";
 
 		// je cree genere l'automate determiniser

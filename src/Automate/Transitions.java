@@ -52,9 +52,6 @@ public class Transitions extends
 	
 	public List<Etat> getTransition(Etat et, String Etiquet) throws ValidationException{
 		
-		
-		   List<String> valid = Arrays.asList(Alphabet);
-		   
 		   if(!Character.isLetterOrDigit(Etiquet.charAt(0))){
 			   throw new ValidationException("L'etiquet \""+Etiquet+"\" n'est pas un carractere de l'alphabet");
 		   }

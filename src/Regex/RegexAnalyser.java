@@ -5,6 +5,7 @@ import Utils.Constans;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Cette classe nous permet d'effectuer les verification possible sur le regex
@@ -96,6 +97,17 @@ public class RegexAnalyser {
 			// et qui n'est pas une parenthese
 
 		}
+		return true;
+	}
+	
+	public static boolean verifierSimotApartinentAphabet(String mot){
+		 List<String> valid = Arrays.asList(Constans.APHABET);
+		for(int i=0;i<mot.length();i++){
+			if( !valid.contains((mot.charAt(i)+""))){
+				return false;
+			}
+		}
+		
 		return true;
 	}
 
