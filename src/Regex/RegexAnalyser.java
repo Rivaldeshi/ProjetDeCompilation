@@ -4,7 +4,6 @@ import Utils.ValidationException;
 import Utils.Constans;
 import java.util.Arrays;
 
-
 /**
  * Cette classe nous permet d'effectuer les verification possible sur le regex
  * si elle est bien former ou elle appartient mm a l'alphabet
@@ -75,12 +74,14 @@ public class RegexAnalyser {
 	public static Boolean verifySiRegexApartientALaphabet(RegexAnalyser monRegex) throws ValidationException {
 		char[] symboles = monRegex.regex.toCharArray();
 		for (char elt : symboles) {
-			if (!(Arrays.asList(monRegex.alphabet).contains(String.valueOf(elt)))
-					&& !(Arrays.asList(Constans.OPERATEUR_PAR_DEFAUT).contains(String.valueOf(elt))))
+			if ((!(Arrays.asList(monRegex.alphabet).contains(String.valueOf(elt)))
+					&& (!(Arrays.asList(Constans.OPERATEUR_PAR_DEFAUT).contains(String.valueOf(elt)))))
+					&& ((elt != '(')) && (elt != ')'))
 				throw new ValidationException("il ya des carracteres qui n'apartienent pas a l'alphabet ");
-			// on retourne faux sil ya un carractere de l'expression reg qui n'appartient ni
+			// on retourne l'erreur sil ya un carractere de l'expression reg qui
+			// n'appartient ni
 			// a lalphabet , ni a un operateur
-			// je vais gerer le cas des parrenthese apres
+			// et qui n'est pas une parenthese
 
 		}
 		return true;
@@ -90,7 +91,7 @@ public class RegexAnalyser {
 		return alphabet;
 	}
 
-	public void setAlphabet( String[]  alphabet) {
+	public void setAlphabet(String[] alphabet) {
 		this.alphabet = alphabet;
 	}
 
