@@ -1,5 +1,9 @@
 package Utils;
 
+import java.util.ArrayList;
+
+import Automate.Etat;
+
 public class Constans {
 	
 	public final static String EPSILON ="ε" ;
@@ -12,7 +16,10 @@ public class Constans {
 	
 	public static String expressionCourant="";
 	public static String motCourant="";
-	public static String chemin="";
+
+	public static ArrayList<Etat> cheminAFN;
+	public static ArrayList<Etat> cheminAFD;
+	public static ArrayList<Etat> cheminM;
 	
 	
 	public final static  String title="PROJET DE COMPILATION";

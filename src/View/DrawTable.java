@@ -27,7 +27,7 @@ public class DrawTable {
 		JTable table = new JTable(data, columnNames);
 
 		table.setRowHeight(30);
-		table.setSelectionBackground(Color.WHITE);
+		table.setSelectionBackground(Color.white);
 		table.setSelectionForeground(Color.black);
 		table.setEnabled(false);
 		table.setFont(new Font("serif", Font.ITALIC, 20));
@@ -37,15 +37,11 @@ public class DrawTable {
 		table.getTableHeader().setReorderingAllowed(false);
 		
 		table.setOpaque(false);
-
-		table.getTableHeader().setReorderingAllowed(false);
 		table.getTableHeader().setPreferredSize(new Dimension(400, 35));
 
 		JScrollPane sp = new JScrollPane(table);
-
 		sp.setBorder(null);
 		sp.getViewport().setBackground(Color.white);
-
 		pan.add(sp);
 		pan.setBackground(Color.white);
 		return pan;
@@ -63,16 +59,8 @@ public class DrawTable {
 					tab[i][j] = automate.getStates().get(i);
 				} else {
 					String str = "";
-					for (int k = 0; k < automate
-							.getTransitionTable()
-							.getTransition(automate.getStates().get(i),
-									Constans.APHABET[j - 1]).size(); k++) {
-						str += " "
-								+ automate
-										.getTransitionTable()
-										.getTransition(
-												automate.getStates().get(i),
-												Constans.APHABET[j - 1]).get(k)
+					for (int k = 0; k < automate.getTransitionTable().getTransition(automate.getStates().get(i),Constans.APHABET[j - 1]).size(); k++) {
+						str += " "+ automate.getTransitionTable().getTransition(automate.getStates().get(i),Constans.APHABET[j - 1]).get(k)
 								+ "  ,  ";
 					}
 					tab[i][j] = str;

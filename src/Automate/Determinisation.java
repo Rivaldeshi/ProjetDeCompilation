@@ -19,18 +19,15 @@ import Utils.ValidationException;
 public class Determinisation {
 
 	/**
-	 * cette fonction nous retourne juste l'epsilone fermeture d'une liste
-	 * d'etat facilement comme sa
+	 * cette fonction nous retourne juste l'epsilone fermeture d'une liste d'etat
+	 * facilement comme sa
 	 * 
-	 * @param aut
-	 *            automate en question
-	 * @param etats
-	 *            la liste de chose a espsilone fermeturer
+	 * @param aut   automate en question
+	 * @param etats la liste de chose a espsilone fermeturer
 	 * @throws ValidationException
 	 */
 
-	public static List<Etat> epsilonFermeture(Automate aut, List<Etat> etats)
-			throws ValidationException {
+	public static List<Etat> epsilonFermeture(Automate aut, List<Etat> etats) throws ValidationException {
 		ArrayList<Etat> etatEpsilonesque = new ArrayList<Etat>();
 
 		// c'est juste l'algorithme du coure faur=t lire page 78 on a juste mit
@@ -39,8 +36,7 @@ public class Determinisation {
 			if (!etatEpsilonesque.contains(etat)) {
 				etatEpsilonesque.add(etat);
 				Stack<Etat> pile = new Stack<Etat>();
-				List<Etat> transitiondirect = aut.getTransitionTable()
-						.getTransition(etat, Constans.EPSILON);
+				List<Etat> transitiondirect = aut.getTransitionTable().getTransition(etat, Constans.EPSILON);
 
 				for (Etat et : transitiondirect) {
 					etatEpsilonesque.add(et);
@@ -50,8 +46,7 @@ public class Determinisation {
 				while (!pile.empty()) {
 
 					Etat t = pile.pop();
-					List<Etat> transition = aut.getTransitionTable()
-							.getTransition(t, Constans.EPSILON);
+					List<Etat> transition = aut.getTransitionTable().getTransition(t, Constans.EPSILON);
 					for (Etat et : transition) {
 						if (!etatEpsilonesque.contains(et)) {
 							etatEpsilonesque.add(et);
@@ -65,8 +60,7 @@ public class Determinisation {
 		return etatEpsilonesque;
 	}
 
-	public static Automate Determiniser(Automate automat)
-			throws ValidationException {
+	public static Automate Determiniser(Automate automat) throws ValidationException {
 		return Determiniser(automat, true);
 
 	}
@@ -74,12 +68,10 @@ public class Determinisation {
 	/**
 	 * cette fonction nous retourne l'automate determimiser d'un automate
 	 * 
-	 * @param automat
-	 *            automate en question
+	 * @param automat automate en question
 	 * 
 	 */
-	public static Automate Determiniser(Automate automat, boolean complet)
-			throws ValidationException {
+	public static Automate Determiniser(Automate automat, boolean complet) throws ValidationException {
 
 		// creation du nouveau automate
 		Automate autdeter = new Automate(Constans.APHABET);
@@ -96,8 +88,7 @@ public class Determinisation {
 		initials.add(automat.getInitialState());
 
 		// la premier Detat issue de qo
-		Detats Q0 = new Detats(epsilonFermeture(automat, initials), autdeter
-				.getStates().size());
+		Detats Q0 = new Detats(epsilonFermeture(automat, initials), autdeter.getStates().size());
 
 		// on verifie si Q0 a un etat finale dans lui si oui elle devient aussi
 		// finale
@@ -141,8 +132,7 @@ public class Determinisation {
 						if (detats.get(i).equals(u)) {
 							contains = false;
 							// si oui on ajoute la transition
-							autdeter.ajouterUneTransition(deta.Etat, Sym,
-									detats.get(i).Etat);
+							autdeter.ajouterUneTransition(deta.Etat, Sym, detats.get(i).Etat);
 						}
 					}
 
@@ -171,15 +161,14 @@ public class Determinisation {
 		return autdeter;
 	}
 
-	public static List<Etat> Transiter(Automate aut, List<Etat> etats,
-			String Sysm) throws ValidationException {
+	public static List<Etat> Transiter(Automate aut, List<Etat> etats, String Sysm) throws ValidationException {
 		List<Etat> etatss = new ArrayList<Etat>();
 		for (Etat et : etats) {
 			List<Etat> eta = aut.getTransitionTable().getTransition(et, Sysm);
-
-			for (Etat i : eta) {
-				etatss.add(i);
-			}
+			if (eta != null)
+				for (Etat i : eta) {
+					etatss.add(i);
+				}
 		}
 		return etatss;
 	}

@@ -34,7 +34,7 @@ public class Legende extends Panel {
 		graph.getModel().beginUpdate();
 
 		try {
-			graph.insertVertex(parent, null, nom, 0, 0,90, 90,type);
+			graph.insertVertex(parent, null, nom, 0, 0,70, 70,type);
 
 		} finally {
 			graph.getModel().endUpdate();

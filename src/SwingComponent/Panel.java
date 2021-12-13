@@ -34,7 +34,7 @@ public class Panel extends JPanel {
 		titre.setForeground(Color.WHITE);
 		titre.setOpaque(true);
 		this.add(titre);
-		this.add(Box.createRigidArea(new Dimension(40, 40)));
+		this.add(Box.createRigidArea(new Dimension(20, 20)));
 	}
 
 	public Panel(String s, int size) {

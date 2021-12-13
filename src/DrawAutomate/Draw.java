@@ -2,24 +2,20 @@ package DrawAutomate;
 
 import Automate.Automate;
 import Automate.Etat;
+import AutomateRegex.Verifications;
+import SwingComponent.Label;
 import SwingComponent.Panel;
 import Utils.Constans;
 import Utils.ValidationException;
-
 import com.mxgraph.swing.mxGraphComponent;
 import com.mxgraph.view.mxGraph;
 import com.mxgraph.view.mxPerimeter;
 import com.mxgraph.view.mxStylesheet;
-
 import java.awt.Color;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.SwingConstants;
-
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.util.mxConstants;
 
@@ -49,17 +45,17 @@ public class Draw {
 		STYLE.putCellStyle("INITIAL", style);
 
 		style = new HashMap<String, Object>();
-		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-		style.put(mxConstants.STYLE_FONTCOLOR, "white");
+		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_DOUBLE_ELLIPSE);
+		style.put(mxConstants.STYLE_FONTCOLOR, "black");
 		style.put(mxConstants.STYLE_OPACITY, 80);
 		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
 		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
-		style.put(mxConstants.STYLE_FILLCOLOR, "red");
+		style.put(mxConstants.STYLE_FILLCOLOR, "white");
 		style.put(mxConstants.STYLE_STROKECOLOR, "#000000");
 		STYLE.putCellStyle("FINAL", style);
 
 		style = new HashMap<String, Object>();
-		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_DOUBLE_ELLIPSE);
 		style.put(mxConstants.STYLE_FONTCOLOR, "white");
 		style.put(mxConstants.STYLE_OPACITY, 80);
 		style.put(mxConstants.STYLE_PERIMETER, mxPerimeter.EllipsePerimeter);
@@ -73,18 +69,28 @@ public class Draw {
 		style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_CLASSIC);
 		style.put(mxConstants.STYLE_VERTICAL_ALIGN, mxConstants.ALIGN_LEFT);
 		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
+		style.put(mxConstants.STYLE_OPACITY, 80);
+		style.put(mxConstants.STYLE_STROKECOLOR, "red");
+		STYLE.putCellStyle("NOT", style);
+
+		style = new HashMap<String, Object>();
+		style.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CONNECTOR);
+		style.put(mxConstants.STYLE_ENDARROW, mxConstants.ARROW_CLASSIC);
+		style.put(mxConstants.STYLE_VERTICAL_ALIGN, mxConstants.ALIGN_LEFT);
+		style.put(mxConstants.STYLE_ALIGN, mxConstants.ALIGN_CENTER);
 		style.put(mxConstants.STYLE_STROKECOLOR, "black");
+		style.put(mxConstants.STYLE_OPACITY, 80);
 		STYLE.setDefaultEdgeStyle(style);
 
 	}
 
-	public static Panel drawAutomate(Automate automate)
+	public static Panel drawAutomate(Automate automate, ArrayList<Etat> trace)
 			throws ValidationException {
-		return drawAutomate(automate, "");
+		return drawAutomate(automate, "", trace);
 	}
 
-	public static Panel drawAutomate(Automate automate, String nom)
-			throws ValidationException {
+	public static Panel drawAutomate(Automate automate, String nom,
+			ArrayList<Etat> trace) throws ValidationException {
 
 		// Creates graph with model
 		mxGraph graph = new mxGraph();
@@ -119,12 +125,12 @@ public class Draw {
 
 			for (Etat et : automate.getStates()) {
 				for (String symb : Constans.APHABET) {
-					for (Etat dest : automate.getTransitionTable()
-							.getTransition(et, symb)) {
-
-						graph.insertEdge(parent, null, symb.toString(),
-								vertexs.get(automate.getStates().indexOf(et)),
-								vertexs.get(automate.getStates().indexOf(dest)));
+					for (Etat dest : automate.getTransitionTable().getTransition(et, symb)) {
+						if (Verifications.succesive(trace, et, dest)) {
+							graph.insertEdge(parent, null, symb.toString(),vertexs.get(automate.getStates().indexOf(et)), vertexs.get(automate.getStates().indexOf(dest)), "NOT");
+						}else{
+							graph.insertEdge(parent, null, symb.toString(),vertexs.get(automate.getStates().indexOf(et)), vertexs.get(automate.getStates().indexOf(dest)));
+						}
 					}
 				}
 			}
@@ -133,9 +139,11 @@ public class Draw {
 			graph.getModel().endUpdate();
 		}
 
-		Panel pan = nom.equals("") ? new Panel() : new Panel(nom +" de "+"\""+Constans.expressionCourant+"\"");
-         
-		pan.add(Box.createRigidArea(new Dimension(50, 50)));
+		Panel pan = nom.equals("") ? new Panel() : new Panel(nom);
+		pan.add(new Label("<html>Expression    : "+Constans.expressionCourant+"</html>"));
+		String s = Constans.motCourant.equals("")? Constans.EPSILON: Constans.motCourant;
+		pan.add(new Label("<html>Mot           : "+s+"</html>"));
+		
 		mxHierarchicalLayout layout = new mxHierarchicalLayout(graph);
 
 		layout.setOrientation(SwingConstants.WEST);
@@ -144,7 +152,7 @@ public class Draw {
 		mxGraphComponent graphComponent = new mxGraphComponent(graph);
 
 		graphComponent.getViewport().setOpaque(true);
-		
+
 		graphComponent.getViewport().setBackground(Color.WHITE);
 		graphComponent.setBorder(BorderFactory.createEmptyBorder());
 		graphComponent.setEnabled(false);

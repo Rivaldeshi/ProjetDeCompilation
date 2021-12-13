@@ -3,8 +3,14 @@ package View;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
+
 import Automate.Automate;
+import Automate.Determinisation;
+import Automate.Etat;
+import Automate.Minimiser;
 import AutomateRegex.Verifications;
 import Regex.RegexAnalyser;
 import Regex.TransformRegex;
@@ -44,7 +50,7 @@ public class Verification extends Panel {
 		p.add(pexpr);
 		p.add(pmot);
 		p.add(res);
-		
+
 		chemin.setForeground(Color.BLUE);
 
 		JPanel p1 = new JPanel();
@@ -66,10 +72,8 @@ public class Verification extends Panel {
 					Constans.expressionCourant = regex;
 
 					if (regex.length() == 0)
-						throw new ValidationException(
-								"EXpression reguliere est vide");
-					Constans.APHABET = RegexAnalyser
-							.ChercherAphabetApartireDuRegex(expr.getText());
+						throw new ValidationException("EXpression reguliere est vide");
+					Constans.APHABET = RegexAnalyser.ChercherAphabetApartireDuRegex(expr.getText());
 
 					Constans.motCourant = mot1;
 
@@ -77,21 +81,32 @@ public class Verification extends Panel {
 					MainView.AutomateCourant = aut;
 					MainView.menu.bon();
 
-					if (Verifications.ApartientAutomate(mot1, aut)) {
+					ArrayList<Etat> trace = new ArrayList<Etat>();
+
+					if (Verifications.ApartientAutomate(mot1, aut, trace)) {
 						res.setForeground(Color.GREEN);
 						res.setText("appatient au language");
 					} else {
 						res.setForeground(Color.red);
 						res.setText("n'appatient pas au language");
 					}
-					;
+					Constans.cheminAFD = trace;
 
-					chemin.setText("Le chemin pris par le mot dans L'AFD est : "
-							+ "" + Constans.chemin);
+					trace = new ArrayList<Etat>();
+					if (Verifications.ApartientAutomateAFN(aut, mot1, aut.getInitialState(), trace)) {
+						Constans.cheminAFN = trace;
+						trace = new ArrayList<Etat>();
+						Automate min = Minimiser.minimisation(Determinisation.Determiniser(aut));
+						Verifications.ApartientAutomateAFN(min, mot1, min.getInitialState(), trace);
+						Constans.cheminM = trace;
+					}else{
+						Constans.cheminM = new ArrayList<Etat>();
+						Constans.cheminAFN =new ArrayList<Etat>();
+					}
 
 				} catch (ValidationException e1) {
 					erreur.setText(e1.getMessage());
-					e1.printStackTrace();
+					System.out.println(e1.getMessage());
 				}
 			}
 		});

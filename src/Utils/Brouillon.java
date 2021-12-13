@@ -4,8 +4,6 @@ package Utils;
 import java.util.Scanner;
 
 import Regex.TransformRegex;
-import SwingComponent.Frame;
-import SwingComponent.Panel;
 import View.DrawTable;
 import Automate.Automate;
 import Automate.AutomateOperation;
@@ -13,7 +11,7 @@ import Automate.Determinisation;
 import Automate.Etat;
 import AutomateRegex.Verifications;
 import Automate.Minimiser;
-import DrawAutomate.Draw;
+
 
 public class Brouillon {
 
@@ -97,25 +95,7 @@ public class Brouillon {
 		}
 	}
 
-	public static void testDessin() {
-		try {
-			Automate aut = ou(sim("a"),sim("b"));
-			Panel pan = Draw.drawAutomate(aut);
 
-			Panel pan1 = Draw.drawAutomate(Determinisation.Determiniser(aut,false));
-
-			Frame frame = new Frame();
-
-			frame.add(pan);
-			frame.add(pan1);
-
-			frame.setVisible(true);
-
-		} catch (ValidationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	public static void test() {
 
@@ -137,7 +117,7 @@ public class Brouillon {
 
 			System.out.println();
 
-			Verifications.ApartientAutomate(mot, aut);
+			Verifications.ApartientAutomate(mot, aut,null);
 			sc.close();
 
 		} catch (ValidationException e) {
